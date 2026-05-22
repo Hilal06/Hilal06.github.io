@@ -3,8 +3,12 @@
   import Hero from './components/Hero.svelte';
   import Projects from './components/Projects.svelte';
   import Footer from './components/Footer.svelte';
+  import About from './components/About.svelte';
+  import Cursor from './components/Cursor.svelte';
+  import GlowOrb from './components/GlowOrb.svelte';
   import { getProfile, getRepos, type GitHubProfile } from './lib/github';
   import projectsData from './data/projects.json';
+  import Lenis from 'lenis';
   
   let profile: GitHubProfile | null = null;
   let repos: any[] = projectsData;
@@ -12,6 +16,18 @@
   let error: string | null = null;
 
   onMount(async () => {
+    // Initialize Lenis for smooth scrolling
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+    });
+
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
     try {
       profile = await getProfile('Hilal06');
     } catch (err) {
@@ -56,13 +72,16 @@
   });
 </script>
 
+<Cursor />
+
 <main class="min-h-screen flex flex-col bg-surface-900 selection:bg-brand-500/30 selection:text-brand-200">
+  <GlowOrb />
+  
   <div class="flex-grow relative overflow-hidden">
-    <!-- Subtle background effect -->
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[500px] bg-brand-500/10 blur-[120px] rounded-full pointer-events-none"></div>
 
     <div class="relative z-10">
       <Hero {profile} />
+      <About />
       
       {#if error}
         <div class="max-w-7xl mx-auto px-6 mb-12">

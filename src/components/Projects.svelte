@@ -27,12 +27,12 @@
     </div>
   {:else}
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      {#each repos as repo}
+      {#each repos as repo, i}
         <a
           href={repo.html_url}
           target="_blank"
           rel="noopener noreferrer"
-          class="group block bg-surface-800 rounded-2xl border border-surface-700 hover:border-brand-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-brand-500/10 hover:-translate-y-1 relative overflow-hidden flex flex-col"
+          class="group block bg-surface-800 rounded-2xl border border-surface-700 hover:border-brand-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-brand-500/10 hover:-translate-y-1 relative overflow-hidden flex flex-col {i % 2 !== 0 ? 'md:mt-24' : ''}"
         >
           {#if repo.screenshot}
             <div class="h-48 overflow-hidden relative border-b border-surface-700 shrink-0">
