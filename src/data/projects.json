@@ -8,5 +8,15 @@
     "description": "A cinematic, responsive wedding invitation website featuring micro-animations, calligraphy text reveals, and glowing UI elements.",
     "screenshot": "./projects/wedding-ui.png",
     "html_url": "https://github.com/Hilal06/ethereal-wedding-invitation"
+  },
+  {
+    "description": "An automated, IoT-enabled DIY fish feeder designed for sleek aquariums. Features precise feeding controls and a modern aesthetic.",
+    "screenshot": "./projects/fish-feeder.png",
+    "html_url": "https://github.com/Hilal06/FishFeederDIY"
+  },
+  {
+    "description": "A modern, sleek, and cinematic IPTV application user interface dashboard displaying live channels and futuristic streaming layouts.",
+    "screenshot": "./projects/iptv.png",
+    "html_url": "https://github.com/Sekte-StackOverflow/IPTV"
   }
 ]

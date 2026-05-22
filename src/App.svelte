@@ -4,11 +4,14 @@
   import Projects from './components/Projects.svelte';
   import Footer from './components/Footer.svelte';
   import About from './components/About.svelte';
-  import Cursor from './components/Cursor.svelte';
   import GlowOrb from './components/GlowOrb.svelte';
   import { getProfile, getRepos, type GitHubProfile } from './lib/github';
   import projectsData from './data/projects.json';
   import Lenis from 'lenis';
+  import gsap from 'gsap';
+  import ScrollTrigger from 'gsap/ScrollTrigger';
+  
+  gsap.registerPlugin(ScrollTrigger);
   
   let profile: GitHubProfile | null = null;
   let repos: any[] = projectsData;
@@ -22,11 +25,13 @@
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
     });
 
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
+    lenis.on('scroll', ScrollTrigger.update);
+
+    gsap.ticker.add((time)=>{
+      lenis.raf(time * 1000)
+    });
+
+    gsap.ticker.lagSmoothing(0, 0);
 
     try {
       profile = await getProfile('Hilal06');
@@ -71,8 +76,6 @@
     }
   });
 </script>
-
-<Cursor />
 
 <main class="min-h-screen flex flex-col bg-surface-900 selection:bg-brand-500/30 selection:text-brand-200">
   <GlowOrb />
