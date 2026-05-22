@@ -21,7 +21,7 @@
 
     try {
       // Fetch user repos (up to 100) to match with our local list
-      const githubRepos = await getRepos('Hilal06', []); 
+      const githubRepos = await getRepos('Hilal06'); 
       
       repos = projectsData.map(localRepo => {
         const ghRepo = githubRepos.find(r => r.html_url === localRepo.html_url);
