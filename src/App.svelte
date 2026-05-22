@@ -5,6 +5,14 @@
   import Footer from './components/Footer.svelte';
   import { getProfile, getRepos, type GitHubProfile, type GitHubRepo } from './lib/github';
   
+  // List the exact repository names you want to display, in the order you want them to appear.
+  // Example: ['my-project', 'another-repo', 'awesome-app']
+  // Leave empty [] to automatically display your most recently updated repositories.
+  const featuredRepos: string[] = [
+    // "my-first-repo",
+    // "my-second-repo"
+  ];
+
   let profile: GitHubProfile | null = null;
   let repos: GitHubRepo[] = [];
   let loadingRepos: boolean = true;
@@ -19,7 +27,7 @@
     }
 
     try {
-      repos = await getRepos('Hilal06');
+      repos = await getRepos('Hilal06', featuredRepos);
     } catch (err) {
       console.error(err);
       if (!error) error = "Could not load repositories.";
