@@ -3,18 +3,11 @@
   import Hero from './components/Hero.svelte';
   import Projects from './components/Projects.svelte';
   import Footer from './components/Footer.svelte';
-  import { getProfile, getRepos, type GitHubProfile, type GitHubRepo } from './lib/github';
+  import { getProfile, getRepos, type GitHubProfile } from './lib/github';
+  import projectsData from './data/projects.json';
   
-  // List the exact repository names you want to display, in the order you want them to appear.
-  // Example: ['my-project', 'another-repo', 'awesome-app']
-  // Leave empty [] to automatically display your most recently updated repositories.
-  const featuredRepos: string[] = [
-    // "my-first-repo",
-    // "my-second-repo"
-  ];
-
   let profile: GitHubProfile | null = null;
-  let repos: GitHubRepo[] = [];
+  let repos: any[] = projectsData;
   let loadingRepos: boolean = true;
   let error: string | null = null;
 
@@ -27,10 +20,36 @@
     }
 
     try {
-      repos = await getRepos('Hilal06', featuredRepos);
+      // Fetch user repos (up to 100) to match with our local list
+      const githubRepos = await getRepos('Hilal06', []); 
+      
+      repos = projectsData.map(localRepo => {
+        const ghRepo = githubRepos.find(r => r.html_url === localRepo.html_url);
+        if (ghRepo) {
+          return {
+            ...localRepo,
+            name: ghRepo.name,
+            language: ghRepo.language,
+            updated_at: ghRepo.updated_at
+          };
+        }
+        
+        return {
+          ...localRepo,
+          name: localRepo.html_url.split('/').pop() || 'Project',
+          language: '',
+          updated_at: new Date().toISOString()
+        };
+      });
     } catch (err) {
-      console.error(err);
-      if (!error) error = "Could not load repositories.";
+      console.error("Could not fetch repo details", err);
+      // Fallback to just extracting names from URL
+      repos = projectsData.map(localRepo => ({
+          ...localRepo,
+          name: localRepo.html_url.split('/').pop() || 'Project',
+          language: '',
+          updated_at: new Date().toISOString()
+      }));
     } finally {
       loadingRepos = false;
     }

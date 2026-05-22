@@ -1,0 +1,12 @@
+[
+  {
+    "description": "High-end, industrial-grade Cold Chain Tracker Dashboard built with React, Vite, and Tailwind CSS. Features realistic telemetry charts and shipment tracking.",
+    "screenshot": "./projects/cold-chain.png",
+    "html_url": "https://github.com/Hilal06/cold-chain-dashboard"
+  },
+  {
+    "description": "A cinematic, responsive wedding invitation website featuring micro-animations, calligraphy text reveals, and glowing UI elements.",
+    "screenshot": "./projects/wedding-ui.png",
+    "html_url": "https://github.com/Hilal06/ethereal-wedding-invitation"
+  }
+]
