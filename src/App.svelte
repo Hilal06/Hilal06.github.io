@@ -7,6 +7,7 @@
   import Contact from './components/Contact.svelte';
   import GlowOrb from './components/GlowOrb.svelte';
   import LoadingScreen from './components/LoadingScreen.svelte';
+  import SkillsMarquee from './components/SkillsMarquee.svelte';
   import { getProfile, getRepos, type GitHubProfile } from './lib/github';
   import projectsData from './data/projects.json';
   import Lenis from 'lenis';
@@ -105,6 +106,7 @@
     <div class="relative z-10">
       <Hero {profile} startTyping={!showLoader} />
       <About />
+      <SkillsMarquee />
       
       {#if error}
         <div class="max-w-7xl mx-auto px-6 mb-12">

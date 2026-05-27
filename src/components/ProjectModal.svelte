@@ -6,6 +6,12 @@
   export let project: any = null;
   export let isOpen: boolean = false;
 
+  let selectedImage: string = '';
+
+  $: if (project) {
+    selectedImage = project.images?.[0] || project.screenshot || '';
+  }
+
   const dispatch = createEventDispatcher();
 
   function close() {
@@ -61,14 +67,36 @@
       </button>
 
       <!-- Image Section -->
-      {#if project.screenshot}
-        <div class="w-full md:w-2/5 h-64 md:h-auto relative bg-surface-800 flex-shrink-0">
-          <img 
-            src={project.screenshot} 
-            alt={project.name} 
-            class="absolute inset-0 w-full h-full object-cover" 
-          />
+      {#if selectedImage}
+        <div class="w-full md:w-2/5 h-64 md:h-auto relative bg-surface-800 flex-shrink-0 flex flex-col justify-end overflow-hidden">
+          {#key selectedImage}
+            <img 
+              src={selectedImage} 
+              alt={project.name} 
+              class="absolute inset-0 w-full h-full object-cover"
+              in:fade={{ duration: 300 }}
+            />
+          {/key}
           <div class="absolute inset-0 bg-gradient-to-t from-surface-900 to-transparent md:bg-gradient-to-r md:from-transparent md:to-surface-900 pointer-events-none"></div>
+          
+          <!-- Thumbnails Overlay -->
+          {#if project.images && project.images.length > 1}
+            <div 
+              class="relative z-10 p-4 flex gap-2 overflow-x-auto w-full snap-x [&::-webkit-scrollbar]:hidden" 
+              style="-ms-overflow-style: none; scrollbar-width: none;"
+            >
+              {#each project.images as img}
+                <!-- svelte-ignore a11y-click-events-have-key-events -->
+                <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+                <img 
+                  src={img} 
+                  alt="{project.name} thumbnail" 
+                  class="w-16 h-12 md:w-20 md:h-14 object-cover rounded-lg cursor-pointer border-2 shadow-lg transition-all flex-shrink-0 snap-start {selectedImage === img ? 'border-brand-500 opacity-100 scale-105' : 'border-white/20 opacity-60 hover:opacity-100 hover:scale-105'}"
+                  on:click={() => selectedImage = img}
+                />
+              {/each}
+            </div>
+          {/if}
         </div>
       {/if}
 
