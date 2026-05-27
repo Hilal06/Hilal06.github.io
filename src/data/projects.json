@@ -1,22 +1,38 @@
 [
   {
     "description": "High-end, industrial-grade Cold Chain Tracker Dashboard built with React, Vite, and Tailwind CSS. Features realistic telemetry charts and shipment tracking.",
+    "longDescription": "A robust, high-performance web dashboard engineered for logistics and supply chain management. This application visualizes real-time telemetry data, providing intuitive insights into temperature fluctuations and shipment statuses across the cold chain.",
+    "techStack": ["React", "Vite", "Tailwind CSS", "Recharts"],
+    "features": ["Real-time temperature telemetry visualization", "Interactive shipment tracking lists", "Responsive and premium industrial UI design"],
     "screenshot": "./projects/cold-chain.png",
-    "html_url": "https://github.com/Hilal06/cold-chain-dashboard"
+    "html_url": "https://github.com/Hilal06/cold-chain-dashboard",
+    "isPrivate": false
   },
   {
     "description": "A cinematic, responsive wedding invitation website featuring micro-animations, calligraphy text reveals, and glowing UI elements.",
+    "longDescription": "An ethereal and cinematic digital wedding invitation designed to provide a premium user experience. Built with Svelte and GSAP, it features intricate scroll-triggered animations, glowing visual effects, and seamless transitions to create a memorable impression.",
+    "techStack": ["Svelte", "GSAP", "Tailwind CSS", "Vite"],
+    "features": ["Cinematic scroll-triggered micro-animations", "Responsive layout optimized for all devices", "Custom calligraphy text reveal effects"],
     "screenshot": "./projects/wedding-ui.png",
-    "html_url": "https://github.com/Hilal06/ethereal-wedding-invitation"
+    "html_url": "https://github.com/Hilal06/ethereal-wedding-invitation",
+    "isPrivate": false
   },
   {
     "description": "An automated, IoT-enabled DIY fish feeder designed for sleek aquariums. Features precise feeding controls and a modern aesthetic.",
+    "longDescription": "A complete IoT hardware and software solution for automated aquarium maintenance. This DIY fish feeder integrates microcontrollers with a custom web interface, allowing users to schedule feedings with precision while maintaining a sleek, modern look for their tank setup.",
+    "techStack": ["C++", "Arduino/ESP32", "IoT", "WebSockets"],
+    "features": ["Automated precision feeding schedules", "Real-time control via web interface", "Custom 3D-printable modern housing design"],
     "screenshot": "./projects/fish-feeder.png",
-    "html_url": "https://github.com/Hilal06/FishFeederDIY"
+    "html_url": "https://github.com/Hilal06/FishFeederDIY",
+    "isPrivate": true
   },
   {
     "description": "A modern, sleek, and cinematic IPTV application user interface dashboard displaying live channels and futuristic streaming layouts.",
+    "longDescription": "A next-generation user interface for IPTV streaming, conceptualized to mimic the premium feel of top-tier streaming services. The dashboard features dynamic channel browsing, live preview capabilities, and a highly polished dark-mode aesthetic for immersive viewing.",
+    "techStack": ["Vue.js/Svelte", "Tailwind CSS", "Video.js", "HLS"],
+    "features": ["Futuristic dark-mode UI design", "Live channel browsing and EPG layouts", "Smooth cinematic transitions between views"],
     "screenshot": "./projects/iptv.png",
-    "html_url": "https://github.com/Sekte-StackOverflow/IPTV"
+    "html_url": "https://github.com/Sekte-StackOverflow/IPTV",
+    "isPrivate": true
   }
 ]

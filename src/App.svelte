@@ -4,7 +4,9 @@
   import Projects from './components/Projects.svelte';
   import Footer from './components/Footer.svelte';
   import About from './components/About.svelte';
+  import Contact from './components/Contact.svelte';
   import GlowOrb from './components/GlowOrb.svelte';
+  import LoadingScreen from './components/LoadingScreen.svelte';
   import { getProfile, getRepos, type GitHubProfile } from './lib/github';
   import projectsData from './data/projects.json';
   import Lenis from 'lenis';
@@ -17,13 +19,24 @@
   let repos: any[] = projectsData;
   let loadingRepos: boolean = true;
   let error: string | null = null;
+  let showLoader: boolean = true;
+  let lenisInstance: any = null;
 
   onMount(async () => {
+    // Force scroll to top on reload
+    if (typeof window !== 'undefined') {
+      window.history.scrollRestoration = 'manual';
+      window.scrollTo(0, 0);
+    }
+
     // Initialize Lenis for smooth scrolling
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
     });
+    
+    lenisInstance = lenis;
+    lenis.stop(); // Disable scrolling while loader is active
 
     lenis.on('scroll', ScrollTrigger.update);
 
@@ -77,13 +90,20 @@
   });
 </script>
 
+{#if showLoader}
+  <LoadingScreen loading={loadingRepos} on:complete={() => {
+    showLoader = false;
+    if (lenisInstance) lenisInstance.start();
+  }} />
+{/if}
+
 <main class="min-h-screen flex flex-col bg-surface-900 selection:bg-brand-500/30 selection:text-brand-200">
   <GlowOrb />
   
   <div class="flex-grow relative overflow-hidden">
 
     <div class="relative z-10">
-      <Hero {profile} />
+      <Hero {profile} startTyping={!showLoader} />
       <About />
       
       {#if error}
@@ -95,6 +115,7 @@
       {/if}
 
       <Projects {repos} loading={loadingRepos} />
+      <Contact />
     </div>
   </div>
   

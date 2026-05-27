@@ -2,6 +2,7 @@
   import { onMount, tick, onDestroy } from 'svelte';
   import gsap from 'gsap';
   import Draggable from 'gsap/Draggable';
+  import ProjectModal from './ProjectModal.svelte';
 
   export let repos: any[] = [];
   export let loading: boolean = true;
@@ -17,6 +18,19 @@
         displayRepos = [...displayRepos, ...repos];
       }
     }
+  }
+
+  let selectedProject: any = null;
+  let isModalOpen: boolean = false;
+
+  function openModal(project: any) {
+    selectedProject = project;
+    isModalOpen = true;
+  }
+
+  function closeModal() {
+    isModalOpen = false;
+    setTimeout(() => selectedProject = null, 300); // clear after animation finishes
   }
 
   let gsapInitialized = false;
@@ -107,21 +121,6 @@
     if (nextBtn) nextBtn.addEventListener('click', handleNext);
     if (prevBtn) prevBtn.addEventListener('click', handlePrev);
 
-    Draggable.create(".drag-proxy", {
-      type: "x",
-      trigger: ".gallery",
-      onPress() {
-        this.startOffset = scrub.vars.offset;
-      },
-      onDrag() {
-        scrub.vars.offset = this.startOffset + (this.startX - this.x) * 0.002;
-        scrub.invalidate().restart();
-      },
-      onDragEnd() {
-        scrollToOffset(scrub.vars.offset);
-      }
-    });
-
     // Initialize position
     seamlessLoop.time(wrapTime(0));
 
@@ -143,7 +142,7 @@
     <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight">
       Recent Projects
     </h2>
-    <p class="mt-4 text-gray-400">Scroll or swipe to explore.</p>
+    <p class="mt-1 text-sm text-gray-400 max-w-[200px]">Scroll or swipe to explore.</p>
   </div>
 
   {#if loading}
@@ -153,20 +152,27 @@
   {:else}
     <ul class="cards absolute w-[80vw] max-w-[600px] h-[50vw] max-h-[350px] list-none p-0 m-0" style="top: 50%; left: 50%; transform: translate(-50%, -50%); perspective: 1000px;">
       {#each displayRepos as repo, index}
-        <li class="absolute top-0 left-0 w-full h-full will-change-transform flex flex-col justify-end overflow-hidden rounded-2xl border border-surface-700 bg-surface-800 shadow-2xl">
+        <li class="group absolute top-0 left-0 w-full h-full will-change-transform flex flex-col justify-end overflow-hidden rounded-2xl border border-surface-700 bg-surface-800 shadow-2xl hover:border-brand-500/50 hover:shadow-brand-500/20 transition-all duration-300">
           {#if repo.screenshot}
             <img src={repo.screenshot} alt={repo.name} class="absolute inset-0 w-full h-full object-cover pointer-events-none" />
           {/if}
           <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent pointer-events-none"></div>
           
           <div class="relative z-10 p-6 flex flex-col gap-2 pointer-events-auto">
-            <h3 class="text-2xl font-bold text-white">{repo.name}</h3>
+            <div class="flex justify-between items-start gap-2">
+              <h3 class="text-2xl font-bold text-white truncate">{repo.name}</h3>
+              {#if repo.isPrivate !== undefined}
+                <span class="px-2.5 py-0.5 text-[10px] uppercase tracking-wider font-bold rounded-full shrink-0 mt-1.5 {repo.isPrivate ? 'bg-red-500/10 text-red-400 border border-red-500/20' : 'bg-brand-500/10 text-brand-400 border border-brand-500/20'}">
+                  {repo.isPrivate ? 'Private' : 'Public'}
+                </span>
+              {/if}
+            </div>
             <p class="text-gray-300 text-sm line-clamp-3">{repo.description}</p>
             
             <div class="flex items-center gap-4 mt-4">
-              <a href={repo.html_url} target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 bg-brand-500 hover:bg-brand-400 text-white font-medium rounded-full transition-colors">
-                View Project
-              </a>
+              <button on:click={() => openModal(repo)} class="px-5 py-2.5 bg-brand-500 hover:bg-brand-400 text-white font-medium rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-brand-500/25">
+                View Details
+              </button>
               {#if repo.language}
                 <div class="flex items-center gap-1.5 text-xs text-gray-400 font-medium ml-auto">
                   <span class="w-2.5 h-2.5 rounded-full bg-brand-400"></span>
@@ -183,7 +189,7 @@
     <div class="drag-proxy hidden"></div>
 
     <!-- Prev / Next Buttons -->
-    <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-4 z-50">
+    <div class="absolute bottom-24 left-1/2 -translate-x-1/2 flex items-center gap-4 z-50">
       <button class="prev-btn px-6 py-2 rounded-full border border-surface-700 bg-surface-800 text-white hover:bg-brand-500 hover:border-brand-500 transition-colors">
         Prev
       </button>
@@ -197,12 +203,22 @@
 <!-- Resume Button rendered outside the pinned gallery -->
 {#if !loading && repos.length > 0}
   <div class="w-full flex justify-center py-24 bg-surface-900 relative z-10">
-    <a href="./resume.pdf" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-3 px-8 py-4 rounded-full bg-surface-800 border border-surface-700 hover:border-brand-500/50 hover:bg-surface-700 transition-all duration-300 shadow-xl hover:shadow-brand-500/20 hover:-translate-y-1 text-gray-200 font-semibold text-lg relative overflow-hidden">
-      <div class="absolute inset-0 bg-gradient-to-r from-brand-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-      <svg class="w-6 h-6 text-brand-400 group-hover:text-brand-300 transition-colors relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-      </svg>
-      <span class="relative z-10">View My Resume</span>
-    </a>
+    <div class="relative group">
+      <div class="absolute -inset-1 bg-gradient-to-r from-brand-500 to-purple-500 rounded-full opacity-40 blur-md animate-pulse"></div>
+      <a href="./resume.pdf" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 px-8 py-4 rounded-full bg-surface-800 border border-surface-700 hover:border-brand-500/50 hover:bg-surface-700 transition-all duration-300 shadow-xl hover:shadow-brand-500/20 hover:-translate-y-1 text-gray-200 font-semibold text-lg relative overflow-hidden z-10">
+        <div class="absolute inset-0 bg-gradient-to-r from-brand-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+        <svg class="w-6 h-6 text-brand-400 group-hover:text-brand-300 transition-colors relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>
+        <span class="relative z-10">View My Resume</span>
+      </a>
+    </div>
   </div>
 {/if}
+
+<ProjectModal 
+  project={selectedProject} 
+  isOpen={isModalOpen} 
+  on:close={closeModal} 
+/>
+

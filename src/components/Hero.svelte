@@ -3,14 +3,16 @@
   import gsap from 'gsap';
   import ScrollTrigger from 'gsap/ScrollTrigger';
   import type { GitHubProfile } from '../lib/github';
+  import profileData from '../data/profile.json';
   
   export let profile: GitHubProfile | null = null;
+  export let startTyping: boolean = false;
 
   let bgRef: HTMLImageElement;
   let textRef: HTMLSpanElement;
 
   let baseText = "Hi, I'm ";
-  $: nameText = profile ? (profile.name || profile.login) : "Hilal";
+  $: nameText = profileData.fullName;
   $: fullText = baseText + nameText;
   
   let displayedText = "";
@@ -39,19 +41,20 @@
     }, 500);
   });
 
-  // Typewriter effect triggered when fullText is ready
-  $: {
-    if (fullText && displayedText === "") {
-      let i = 0;
-      const typeWriter = () => {
-        if (i < fullText.length) {
-          displayedText += fullText.charAt(i);
-          i++;
-          setTimeout(typeWriter, 100);
-        }
-      };
-      setTimeout(typeWriter, 500); // initial delay
-    }
+  let typingStarted = false;
+
+  // Typewriter effect triggered when loading finishes
+  $: if (startTyping && fullText && !typingStarted) {
+    typingStarted = true;
+    let i = 0;
+    const typeWriter = () => {
+      if (i < fullText.length) {
+        displayedText += fullText.charAt(i);
+        i++;
+        setTimeout(typeWriter, 100);
+      }
+    };
+    setTimeout(typeWriter, 200); // small delay after loader disappears
   }
 </script>
 
@@ -83,14 +86,14 @@
     {/if}
     
     <h1 class="text-4xl md:text-7xl font-bold tracking-tight text-white min-h-[4rem] md:min-h-[5rem] flex items-center">
-      <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-300 via-purple-300 to-brand-100">
+      <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 via-purple-400 to-brand-200 drop-shadow-sm">
         {displayedText}
       </span>
       <span class="inline-block w-[3px] md:w-[5px] h-[35px] md:h-[60px] bg-brand-400 ml-2 {cursorVisible ? 'opacity-100' : 'opacity-0'} transition-opacity"></span>
     </h1>
     
     <p class="mt-8 text-xl md:text-2xl text-gray-300 max-w-3xl leading-relaxed font-light">
-      {profile?.bio || 'A passionate software developer building modern web applications.'}
+      {profileData.bio}
     </p>
 
     <div class="mt-12 flex flex-col sm:flex-row gap-6">
