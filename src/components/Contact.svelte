@@ -1,6 +1,7 @@
 <script lang="ts">
   import { fade, fly } from "svelte/transition";
   import { cubicOut } from "svelte/easing";
+  import { reveal } from "../lib/actions";
 
   // Replace this with your Web3Forms access key
   const ACCESS_KEY = "32d536ac-693d-46d1-bc10-24ef9c832356";
@@ -49,7 +50,7 @@
 >
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
     <!-- Left Column: Copy & Info -->
-    <div class="flex flex-col gap-8">
+    <div class="flex flex-col gap-8" use:reveal={{ y: 30, duration: 0.8 }}>
       <div>
         <h2
           class="text-xs tracking-[0.3em] uppercase text-brand-400 font-semibold flex items-center gap-4 mb-6"
@@ -58,11 +59,11 @@
           Contact
         </h2>
         <h3
-          class="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-tight"
+          class="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tighter leading-[1.1]"
         >
           Let's build something <br />
           <span
-            class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-purple-400"
+            class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-purple-400 tracking-normal"
             >extraordinary.</span
           >
         </h3>
@@ -106,7 +107,7 @@
     </div>
 
     <!-- Right Column: Form -->
-    <div class="relative">
+    <div class="relative" use:reveal={{ y: 50, duration: 1, delay: 0.2 }}>
       <!-- Decorative Background Glow -->
       <div
         class="absolute -inset-4 bg-gradient-to-br from-brand-500/20 to-purple-500/20 rounded-3xl blur-2xl opacity-50 pointer-events-none"

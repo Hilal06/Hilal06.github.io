@@ -3,6 +3,7 @@
   import gsap from 'gsap';
   import Draggable from 'gsap/Draggable';
   import ProjectModal from './ProjectModal.svelte';
+  import { magnetic, reveal } from '../lib/actions';
 
   export let repos: any[] = [];
   export let loading: boolean = true;
@@ -138,11 +139,18 @@
 </script>
 
 <section id="projects" class="gallery relative w-full h-screen overflow-hidden bg-surface-900 z-10 flex items-center justify-center">
-  <div class="absolute top-12 left-6 sm:left-12 lg:left-24 z-50">
-    <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight">
-      Recent Projects
-    </h2>
-    <p class="mt-1 text-sm text-gray-400 max-w-[200px]">Scroll or swipe to explore.</p>
+  <!-- Wrapper to match About and Contact layout alignment -->
+  <div class="absolute inset-0 w-full max-w-7xl mx-auto px-6 sm:px-12 lg:px-24 pointer-events-none z-50">
+    <div class="absolute top-16 sm:top-24 pointer-events-auto" use:reveal={{ y: 30, duration: 1 }}>
+      <h2 class="text-xs tracking-[0.3em] uppercase text-brand-400 font-semibold flex items-center gap-4 mb-4">
+        <span class="w-12 h-[1px] bg-brand-400"></span>
+        Projects
+      </h2>
+      <h3 class="text-3xl md:text-4xl font-bold text-white tracking-tight">
+        Selected Work
+      </h3>
+      <p class="mt-2 text-sm text-gray-400 max-w-[200px]">Scroll or swipe to explore.</p>
+    </div>
   </div>
 
   {#if loading}
@@ -152,7 +160,7 @@
   {:else}
     <ul class="cards absolute w-[80vw] max-w-[600px] h-[50vw] max-h-[350px] list-none p-0 m-0" style="top: 50%; left: 50%; transform: translate(-50%, -50%); perspective: 1000px;">
       {#each displayRepos as repo, index}
-        <li class="group absolute top-0 left-0 w-full h-full will-change-transform flex flex-col justify-end overflow-hidden rounded-2xl border border-surface-700 bg-surface-800 shadow-2xl hover:border-brand-500/50 hover:shadow-brand-500/20 transition-all duration-300">
+        <li class="group absolute top-0 left-0 w-full h-full will-change-transform flex flex-col justify-end overflow-hidden rounded-2xl border border-white/10 bg-surface-800/60 backdrop-blur-xl shadow-2xl hover:border-brand-500/50 hover:shadow-brand-500/30 transition-all duration-300">
           {#if repo.screenshot}
             <img src={repo.screenshot} alt={repo.name} class="absolute inset-0 w-full h-full object-cover pointer-events-none" />
           {/if}
@@ -170,7 +178,7 @@
             <p class="text-gray-300 text-sm line-clamp-3">{repo.description}</p>
             
             <div class="flex items-center gap-4 mt-4">
-              <button on:click={() => openModal(repo)} class="px-5 py-2.5 bg-brand-500 hover:bg-brand-400 text-white font-medium rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-brand-500/25">
+              <button use:magnetic on:click={() => openModal(repo)} class="magnetic-btn px-5 py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-medium rounded-full transition-all duration-300 shadow-lg hover:shadow-brand-500/30">
                 View Details
               </button>
               {#if repo.language}
@@ -190,10 +198,10 @@
 
     <!-- Prev / Next Buttons -->
     <div class="absolute bottom-24 left-1/2 -translate-x-1/2 flex items-center gap-4 z-50">
-      <button class="prev-btn px-6 py-2 rounded-full border border-surface-700 bg-surface-800 text-white hover:bg-brand-500 hover:border-brand-500 transition-colors">
+      <button use:magnetic class="prev-btn magnetic-btn px-6 py-2 rounded-full border border-white/10 bg-surface-800/60 backdrop-blur-md text-gray-200 hover:bg-brand-500 hover:border-brand-500 hover:text-white transition-all shadow-lg">
         Prev
       </button>
-      <button class="next-btn px-6 py-2 rounded-full border border-surface-700 bg-surface-800 text-white hover:bg-brand-500 hover:border-brand-500 transition-colors">
+      <button use:magnetic class="next-btn magnetic-btn px-6 py-2 rounded-full border border-white/10 bg-surface-800/60 backdrop-blur-md text-gray-200 hover:bg-brand-500 hover:border-brand-500 hover:text-white transition-all shadow-lg">
         Next
       </button>
     </div>
@@ -202,10 +210,10 @@
 
 <!-- Resume Button rendered outside the pinned gallery -->
 {#if !loading && repos.length > 0}
-  <div class="w-full flex justify-center py-24 bg-surface-900 relative z-10">
-    <div class="relative group">
+  <div class="w-full flex justify-center py-24 bg-surface-900 relative z-10" use:reveal={{ y: 40, duration: 1, delay: 0.2 }}>
+    <div class="relative group inline-block">
       <div class="absolute -inset-1 bg-gradient-to-r from-brand-500 to-purple-500 rounded-full opacity-40 blur-md animate-pulse"></div>
-      <a href="./resume.pdf" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 px-8 py-4 rounded-full bg-surface-800 border border-surface-700 hover:border-brand-500/50 hover:bg-surface-700 transition-all duration-300 shadow-xl hover:shadow-brand-500/20 hover:-translate-y-1 text-gray-200 font-semibold text-lg relative overflow-hidden z-10">
+      <a use:magnetic href="./resume.pdf" target="_blank" rel="noopener noreferrer" class="magnetic-btn flex items-center gap-3 px-8 py-4 rounded-full bg-surface-800 border border-surface-700 hover:border-brand-500/50 hover:bg-surface-700 transition-all duration-300 shadow-xl hover:shadow-brand-500/20 text-gray-200 font-semibold text-lg relative overflow-hidden z-10">
         <div class="absolute inset-0 bg-gradient-to-r from-brand-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
         <svg class="w-6 h-6 text-brand-400 group-hover:text-brand-300 transition-colors relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
