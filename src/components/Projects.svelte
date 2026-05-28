@@ -208,21 +208,7 @@
   {/if}
 </section>
 
-<!-- Resume Button rendered outside the pinned gallery -->
-{#if !loading && repos.length > 0}
-  <div class="w-full flex justify-center py-24 bg-surface-900 relative z-10" use:reveal={{ y: 40, duration: 1, delay: 0.2 }}>
-    <div class="relative group inline-block">
-      <div class="absolute -inset-1 bg-gradient-to-r from-brand-500 to-purple-500 rounded-full opacity-40 blur-md animate-pulse"></div>
-      <a use:magnetic href="./resume.pdf" target="_blank" rel="noopener noreferrer" class="magnetic-btn flex items-center gap-3 px-8 py-4 rounded-full bg-surface-800 border border-surface-700 hover:border-brand-500/50 hover:bg-surface-700 transition-all duration-300 shadow-xl hover:shadow-brand-500/20 text-gray-200 font-semibold text-lg relative overflow-hidden z-10">
-        <div class="absolute inset-0 bg-gradient-to-r from-brand-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-        <svg class="w-6 h-6 text-brand-400 group-hover:text-brand-300 transition-colors relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-        </svg>
-        <span class="relative z-10">View My Resume</span>
-      </a>
-    </div>
-  </div>
-{/if}
+
 
 <ProjectModal 
   project={selectedProject} 
