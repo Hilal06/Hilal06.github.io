@@ -5,6 +5,7 @@
   import type { GitHubProfile } from "../lib/github";
   import profileData from "../data/profile.json";
   import { magnetic } from "../lib/actions";
+  import ResumeModal from "./ResumeModal.svelte";
 
   export let profile: GitHubProfile | null = null;
   export let startTyping: boolean = false;
@@ -17,6 +18,7 @@
   $: fullText = baseText + nameText;
 
   let animationTriggered = false;
+  let showResumeModal = false;
 
   onMount(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -133,11 +135,9 @@
           <!-- Pulsing Glow Behind Button -->
           <div class="absolute -inset-1 bg-gradient-to-r from-brand-500 to-purple-500 rounded-full opacity-40 blur-md animate-pulse"></div>
           
-          <a
+          <button
             use:magnetic
-            href="./resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
+            on:click={() => showResumeModal = true}
             class="magnetic-btn relative px-8 py-4 rounded-full bg-surface-900 border border-surface-700 hover:border-brand-500/50 hover:bg-surface-800 transition-all duration-300 shadow-xl hover:shadow-brand-500/30 text-white font-semibold text-lg overflow-hidden text-center flex items-center justify-center gap-3 z-10"
           >
             <!-- Hover Gradient Background Overlay -->
@@ -147,11 +147,12 @@
             
             <span class="relative z-10 flex items-center gap-2">
               <svg class="w-5 h-5 text-brand-400 group-hover/btn:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
               </svg>
-              Download Resume
+              View Resume
             </span>
-          </a>
+          </button>
         </div>
         <a
           use:magnetic
@@ -200,6 +201,8 @@
     </svg>
   </div>
 </section>
+
+<ResumeModal isOpen={showResumeModal} on:close={() => showResumeModal = false} pdfUrl="./resume.pdf" />
 
 <style>
   @keyframes pulseSlow {
