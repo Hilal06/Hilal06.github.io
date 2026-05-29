@@ -69,7 +69,7 @@
 
 <section
   id="hero"
-  class="relative w-full h-screen flex flex-col items-center justify-center text-center overflow-hidden bg-surface-900"
+  class="relative w-full min-h-[100dvh] flex flex-col items-center justify-center text-center overflow-hidden bg-surface-900 py-24 lg:py-0"
 >
   <!-- Premium Animated Mesh Gradient & Noise Background -->
   <div
@@ -94,7 +94,7 @@
   <!-- Foreground Content -->
   <div
     bind:this={heroContentRef}
-    class="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-12 lg:px-24 flex flex-col-reverse lg:flex-row items-center justify-between gap-12 lg:gap-20"
+    class="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-12 lg:px-24 flex flex-col-reverse lg:flex-row items-center justify-between gap-8 sm:gap-12 lg:gap-20"
   >
     <!-- Left Column: Text Content -->
     <div
@@ -102,7 +102,7 @@
     >
       <!-- "Available for Work" badge -->
       <div
-        class="hero-item opacity-0 mb-6 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface-800/50 border border-surface-700 backdrop-blur-md text-sm text-gray-300 font-medium shadow-lg"
+        class="hero-item opacity-0 mb-4 sm:mb-6 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface-800/50 border border-surface-700 backdrop-blur-md text-sm text-gray-300 font-medium shadow-lg"
       >
         <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
         Available for Hire
@@ -110,7 +110,7 @@
 
       <!-- Main Heading -->
       <h1
-        class="hero-item opacity-0 text-5xl sm:text-6xl lg:text-[5rem] font-bold tracking-tight text-white mb-6 leading-tight"
+        class="hero-item opacity-0 text-5xl sm:text-6xl lg:text-[5rem] font-bold tracking-tight text-white mb-4 sm:mb-6 leading-tight"
       >
         <span
           class="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-100 to-gray-400 drop-shadow-sm"
@@ -121,14 +121,14 @@
 
       <!-- Subheading / Bio -->
       <p
-        class="hero-item opacity-0 text-lg sm:text-xl text-gray-400 leading-relaxed font-light mb-10 max-w-xl"
+        class="hero-item opacity-0 text-base sm:text-lg lg:text-xl text-gray-400 leading-relaxed font-light mb-8 sm:mb-10 max-w-xl"
       >
         {profileData.bio}
       </p>
 
       <!-- Action Buttons -->
       <div
-        class="hero-item opacity-0 flex flex-col sm:flex-row gap-4 w-full sm:w-auto relative"
+        class="hero-item opacity-0 flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto relative"
       >
         <!-- Primary Button with Outer Glow -->
         <div class="relative group/btn inline-block">
@@ -138,7 +138,7 @@
           <button
             use:magnetic
             on:click={() => showResumeModal = true}
-            class="magnetic-btn relative px-8 py-4 rounded-full bg-surface-900 border border-surface-700 hover:border-brand-500/50 hover:bg-surface-800 transition-all duration-300 shadow-xl hover:shadow-brand-500/30 text-white font-semibold text-lg overflow-hidden text-center flex items-center justify-center gap-3 z-10"
+            class="magnetic-btn relative px-6 py-3 sm:px-8 sm:py-4 rounded-full bg-surface-900 border border-surface-700 hover:border-brand-500/50 hover:bg-surface-800 transition-all duration-300 shadow-xl hover:shadow-brand-500/30 text-white font-semibold text-base sm:text-lg overflow-hidden text-center flex items-center justify-center gap-3 z-10"
           >
             <!-- Hover Gradient Background Overlay -->
             <div
@@ -157,7 +157,7 @@
         <a
           use:magnetic
           href="#projects"
-          class="magnetic-btn px-8 py-4 rounded-full bg-surface-800/50 hover:bg-surface-700 text-gray-200 font-medium transition-all border border-surface-600 backdrop-blur-md text-center"
+          class="magnetic-btn px-6 py-3 sm:px-8 sm:py-4 rounded-full bg-surface-800/50 hover:bg-surface-700 text-gray-200 font-medium text-base sm:text-lg transition-all border border-surface-600 backdrop-blur-md text-center"
         >
           View My Work
         </a>
@@ -177,7 +177,7 @@
           <img
             src={profile.avatar_url}
             alt={profile.name}
-            class="relative w-48 h-48 sm:w-64 sm:h-64 lg:w-80 lg:h-80 rounded-full border-[8px] border-surface-900 shadow-2xl object-cover"
+            class="relative w-40 h-40 sm:w-64 sm:h-64 lg:w-80 lg:h-80 rounded-full border-[6px] sm:border-[8px] border-surface-900 shadow-2xl object-cover"
           />
         </div>
       {/if}
@@ -186,7 +186,7 @@
 
   <!-- Scroll Indicator -->
   <div
-    class="scroll-indicator absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce z-10 text-gray-500 opacity-0"
+    class="scroll-indicator absolute bottom-4 sm:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce z-10 text-gray-500 opacity-0 hidden sm:flex"
   >
     <span class="text-[10px] font-semibold tracking-[0.2em] uppercase"
       >Scroll</span
