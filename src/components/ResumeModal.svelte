@@ -4,8 +4,7 @@
   import { cubicOut } from 'svelte/easing';
   import { magnetic } from '../lib/actions';
 
-  export let isOpen: boolean = false;
-  export let pdfUrl: string = './resume.pdf';
+  let { isOpen = false, pdfUrl = './resume.pdf' }: { isOpen: boolean, pdfUrl?: string } = $props();
 
   const dispatch = createEventDispatcher();
 
@@ -20,13 +19,15 @@
   }
   
   // To prevent scrolling of the background when modal is open
-  $: if (typeof window !== 'undefined') {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
+  $effect(() => {
+    if (typeof window !== 'undefined') {
+      if (isOpen) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
     }
-  }
+  });
 </script>
 
 <svelte:window on:keydown={handleKeydown} />
@@ -37,11 +38,13 @@
     class="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6"
     transition:fade={{ duration: 300, easing: cubicOut }}
   >
-    <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <!-- svelte-ignore a11y-no-static-element-interactions -->
     <div 
       class="absolute inset-0 bg-black/60 backdrop-blur-md" 
-      on:click={close}
+      onclick={close}
+      onkeydown={e => e.key === 'Enter' && close()}
+      role="button"
+      tabindex="0"
+      aria-label="Close modal"
     ></div>
 
     <!-- Modal Content -->
@@ -67,7 +70,7 @@
             Download
           </a>
           <button 
-            on:click={close}
+            onclick={close}
             class="p-2 bg-black/50 hover:bg-red-500 rounded-full text-white backdrop-blur-sm transition-colors border border-white/10"
             aria-label="Close modal"
           >

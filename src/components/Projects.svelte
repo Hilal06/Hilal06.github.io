@@ -1,30 +1,29 @@
 <script lang="ts">
-  import { onMount, tick, onDestroy } from 'svelte';
+  import { tick, onDestroy } from 'svelte';
   import gsap from 'gsap';
   import Draggable from 'gsap/Draggable';
   import ProjectModal from './ProjectModal.svelte';
   import { magnetic, reveal } from '../lib/actions';
+  import type { Project } from '../lib/types';
 
-  export let repos: any[] = [];
-  export let loading: boolean = true;
+  let { repos = [], loading = true }: { repos: Project[], loading: boolean } = $props();
 
   // We need enough DOM elements so GSAP tweens overlap correctly without overwriting.
   // The animation duration is 1 and spacing is 0.1, meaning 10 items can be on screen at once.
   // We duplicate the repos until we have at least 15-20 items.
-  let displayRepos: any[] = [];
-  $: {
-    if (repos && repos.length > 0) {
-      displayRepos = [...repos];
-      while (displayRepos.length < 18) {
-        displayRepos = [...displayRepos, ...repos];
-      }
+  let displayRepos = $derived.by(() => {
+    if (!repos || repos.length === 0) return [];
+    let temp = [...repos];
+    while (temp.length < 18) {
+      temp = [...temp, ...repos];
     }
-  }
+    return temp;
+  });
 
-  let selectedProject: any = null;
-  let isModalOpen: boolean = false;
+  let selectedProject = $state<Project | null>(null);
+  let isModalOpen = $state(false);
 
-  function openModal(project: any) {
+  function openModal(project: Project) {
     selectedProject = project;
     isModalOpen = true;
   }
@@ -34,23 +33,26 @@
     setTimeout(() => selectedProject = null, 300); // clear after animation finishes
   }
 
+  let gsapContext: gsap.Context;
   let gsapInitialized = false;
-  let cleanupGsap: () => void;
 
-  $: if (!loading && repos.length > 0 && !gsapInitialized) {
-    gsapInitialized = true;
-    tick().then(initGsap);
-  }
+  $effect(() => {
+    if (!loading && repos.length > 0 && !gsapInitialized) {
+      gsapInitialized = true;
+      tick().then(initGsap);
+    }
+  });
 
   function initGsap() {
 
     gsap.registerPlugin(Draggable);
 
-    const cards = gsap.utils.toArray('.cards li');
-    if (cards.length === 0) return;
+    gsapContext = gsap.context(() => {
+      const cards = gsap.utils.toArray('.cards li');
+      if (cards.length === 0) return;
 
-    let iteration = 0;
-    gsap.set('.cards li', {xPercent: 400, opacity: 0, scale: 0});
+      let iteration = 0;
+      gsap.set('.cards li', {xPercent: 400, opacity: 0, scale: 0});
 
     const spacing = 0.1;
     const snapTime = gsap.utils.snap(spacing);
@@ -125,17 +127,16 @@
     // Initialize position
     seamlessLoop.time(wrapTime(0));
 
-    cleanupGsap = () => {
-      scrub.kill();
-      seamlessLoop.kill();
+    return () => {
       if (nextBtn) nextBtn.removeEventListener('click', handleNext);
       if (prevBtn) prevBtn.removeEventListener('click', handlePrev);
     };
-  }
-
-  onDestroy(() => {
-    if (cleanupGsap) cleanupGsap();
   });
+}
+
+onDestroy(() => {
+  if (gsapContext) gsapContext.revert();
+});
 </script>
 
 <section id="projects" class="gallery relative w-full h-screen overflow-hidden bg-surface-900 z-10 flex items-center justify-center">
@@ -158,32 +159,32 @@
   {:else if repos.length === 0}
     <div class="text-white text-xl">No projects found.</div>
   {:else}
-    <ul class="cards absolute w-[80vw] max-w-[600px] h-[50vw] max-h-[350px] list-none p-0 m-0" style="top: 50%; left: 50%; transform: translate(-50%, -50%); perspective: 1000px;">
+    <ul class="cards absolute w-[85vw] sm:w-[80vw] max-w-[600px] h-[120vw] min-h-[300px] sm:h-[50vw] max-h-[400px] sm:max-h-[350px] list-none p-0 m-0" style="top: 50%; left: 50%; transform: translate(-50%, -50%); perspective: 1000px;">
       {#each displayRepos as repo, index}
         <li class="group absolute top-0 left-0 w-full h-full will-change-transform flex flex-col justify-end overflow-hidden rounded-2xl border border-white/10 bg-surface-800/60 backdrop-blur-xl shadow-2xl hover:border-brand-500/50 hover:shadow-brand-500/30 transition-all duration-300">
           {#if repo.screenshot}
-            <img src={repo.screenshot} alt={repo.name} class="absolute inset-0 w-full h-full object-cover pointer-events-none" />
+            <img src={repo.screenshot} alt={repo.name} loading="lazy" class="absolute inset-0 w-full h-full object-cover pointer-events-none" />
           {/if}
           <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent pointer-events-none"></div>
           
-          <div class="relative z-10 p-6 flex flex-col gap-2 pointer-events-auto">
+          <div class="relative z-10 p-4 sm:p-6 flex flex-col gap-2 pointer-events-auto">
             <div class="flex justify-between items-start gap-2">
-              <h3 class="text-2xl font-bold text-white truncate">{repo.name}</h3>
+              <h3 class="text-xl sm:text-2xl font-bold text-white truncate">{repo.name}</h3>
               {#if repo.isPrivate !== undefined}
-                <span class="px-2.5 py-0.5 text-[10px] uppercase tracking-wider font-bold rounded-full shrink-0 mt-1.5 {repo.isPrivate ? 'bg-red-500/10 text-red-400 border border-red-500/20' : 'bg-brand-500/10 text-brand-400 border border-brand-500/20'}">
+                <span class="px-2 sm:px-2.5 py-0.5 text-[9px] sm:text-[10px] uppercase tracking-wider font-bold rounded-full shrink-0 mt-1 sm:mt-1.5 {repo.isPrivate ? 'bg-red-500/10 text-red-400 border border-red-500/20' : 'bg-brand-500/10 text-brand-400 border border-brand-500/20'}">
                   {repo.isPrivate ? 'Private' : 'Public'}
                 </span>
               {/if}
             </div>
-            <p class="text-gray-300 text-sm line-clamp-3">{repo.description}</p>
+            <p class="text-gray-300 text-xs sm:text-sm line-clamp-2 sm:line-clamp-3">{repo.description}</p>
             
-            <div class="flex items-center gap-4 mt-4">
-              <button use:magnetic on:click={() => openModal(repo)} class="magnetic-btn px-5 py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-medium rounded-full transition-all duration-300 shadow-lg hover:shadow-brand-500/30">
+            <div class="flex items-center gap-3 sm:gap-4 mt-2 sm:mt-4">
+              <button use:magnetic onclick={() => openModal(repo)} class="magnetic-btn px-4 sm:px-5 py-2 sm:py-2.5 bg-brand-600 hover:bg-brand-500 text-white text-sm sm:text-base font-medium rounded-full transition-all duration-300 shadow-lg hover:shadow-brand-500/30">
                 View Details
               </button>
               {#if repo.language}
-                <div class="flex items-center gap-1.5 text-xs text-gray-400 font-medium ml-auto">
-                  <span class="w-2.5 h-2.5 rounded-full bg-brand-400"></span>
+                <div class="flex items-center gap-1.5 text-[10px] sm:text-xs text-gray-400 font-medium ml-auto">
+                  <span class="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-brand-400"></span>
                   {repo.language}
                 </div>
               {/if}

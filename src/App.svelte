@@ -8,7 +8,8 @@
   import GlowOrb from './components/GlowOrb.svelte';
   import LoadingScreen from './components/LoadingScreen.svelte';
   import SkillsMarquee from './components/SkillsMarquee.svelte';
-  import { getProfile, getRepos, type GitHubProfile } from './lib/github';
+  import { getProfile, getRepos } from './lib/github';
+  import type { GitHubProfile, Project } from './lib/types';
   import projectsData from './data/projects.json';
   import Lenis from 'lenis';
   import gsap from 'gsap';
@@ -16,12 +17,12 @@
   
   gsap.registerPlugin(ScrollTrigger);
   
-  let profile: GitHubProfile | null = null;
-  let repos: any[] = projectsData;
-  let loadingRepos: boolean = true;
-  let error: string | null = null;
-  let showLoader: boolean = true;
-  let lenisInstance: any = null;
+  let profile = $state<GitHubProfile | null>(null);
+  let repos = $state<Project[]>(projectsData as Project[]);
+  let loadingRepos = $state(true);
+  let error = $state<string | null>(null);
+  let showLoader = $state(true);
+  let lenisInstance = $state<any>(null);
 
   onMount(async () => {
     // Force scroll to top on reload
@@ -62,7 +63,7 @@
         const ghRepo = githubRepos.find(r => r.html_url === localRepo.html_url);
         if (ghRepo) {
           return {
-            ...localRepo,
+            ...(localRepo as Project),
             name: ghRepo.name,
             language: ghRepo.language,
             updated_at: ghRepo.updated_at
@@ -70,7 +71,7 @@
         }
         
         return {
-          ...localRepo,
+          ...(localRepo as Project),
           name: localRepo.html_url.split('/').pop() || 'Project',
           language: '',
           updated_at: new Date().toISOString()
@@ -80,7 +81,7 @@
       console.error("Could not fetch repo details", err);
       // Fallback to just extracting names from URL
       repos = projectsData.map(localRepo => ({
-          ...localRepo,
+          ...(localRepo as Project),
           name: localRepo.html_url.split('/').pop() || 'Project',
           language: '',
           updated_at: new Date().toISOString()

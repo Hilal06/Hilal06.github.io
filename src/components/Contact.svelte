@@ -6,7 +6,7 @@
   // Replace this with your Web3Forms access key
   const ACCESS_KEY = "32d536ac-693d-46d1-bc10-24ef9c832356";
 
-  let status: "idle" | "loading" | "success" | "error" = "idle";
+  let status = $state<"idle" | "loading" | "success" | "error">("idle");
 
   async function handleSubmit(event: Event) {
     event.preventDefault();
@@ -114,7 +114,7 @@
       ></div>
 
       <form
-        on:submit={handleSubmit}
+        onsubmit={handleSubmit}
         class="relative bg-surface-800/80 backdrop-blur-xl border border-surface-700 p-8 sm:p-10 rounded-3xl shadow-2xl flex flex-col gap-6"
       >
         <input type="hidden" name="access_key" value={ACCESS_KEY} />

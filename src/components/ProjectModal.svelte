@@ -4,14 +4,17 @@
   import { cubicOut } from 'svelte/easing';
   import { magnetic } from '../lib/actions';
 
-  export let project: any = null;
-  export let isOpen: boolean = false;
+  import type { Project } from '../lib/types';
 
-  let selectedImage: string = '';
+  let { project = null, isOpen = false }: { project: Project | null, isOpen: boolean } = $props();
 
-  $: if (project) {
-    selectedImage = project.images?.[0] || project.screenshot || '';
-  }
+  let selectedImage = $state<string>('');
+
+  $effect(() => {
+    if (project) {
+      selectedImage = project.images?.[0] || project.screenshot || '';
+    }
+  });
 
   const dispatch = createEventDispatcher();
 
@@ -26,13 +29,15 @@
   }
   
   // To prevent scrolling of the background when modal is open
-  $: if (typeof window !== 'undefined') {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
+  $effect(() => {
+    if (typeof window !== 'undefined') {
+      if (isOpen) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
     }
-  }
+  });
 </script>
 
 <svelte:window on:keydown={handleKeydown} />
@@ -43,11 +48,13 @@
     class="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6"
     transition:fade={{ duration: 300, easing: cubicOut }}
   >
-    <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <!-- svelte-ignore a11y-no-static-element-interactions -->
     <div 
       class="absolute inset-0 bg-black/60 backdrop-blur-md" 
-      on:click={close}
+      onclick={close}
+      onkeydown={e => e.key === 'Enter' && close()}
+      role="button"
+      tabindex="0"
+      aria-label="Close modal"
     ></div>
 
     <!-- Modal Content -->
@@ -57,7 +64,7 @@
     >
       <!-- Close Button -->
       <button 
-        on:click={close}
+        onclick={close}
         class="absolute top-4 right-4 z-50 p-2 bg-black/50 hover:bg-brand-500 rounded-full text-white backdrop-blur-sm transition-colors border border-white/10"
         aria-label="Close modal"
       >
@@ -87,14 +94,17 @@
               style="-ms-overflow-style: none; scrollbar-width: none;"
             >
               {#each project.images as img}
-                <!-- svelte-ignore a11y-click-events-have-key-events -->
-                <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-                <img 
-                  src={img} 
-                  alt="{project.name} thumbnail" 
-                  class="w-16 h-12 md:w-20 md:h-14 object-cover rounded-lg cursor-pointer border-2 shadow-lg transition-all flex-shrink-0 snap-start {selectedImage === img ? 'border-brand-500 opacity-100 scale-105' : 'border-white/20 opacity-60 hover:opacity-100 hover:scale-105'}"
-                  on:click={() => selectedImage = img}
-                />
+                <button
+                  type="button"
+                  onclick={() => selectedImage = img}
+                  class="flex-shrink-0 snap-start outline-none focus:ring-2 focus:ring-brand-500 rounded-lg"
+                >
+                  <img 
+                    src={img} 
+                    alt="{project.name} thumbnail" 
+                    class="w-16 h-12 md:w-20 md:h-14 object-cover rounded-lg cursor-pointer border-2 shadow-lg transition-all block {selectedImage === img ? 'border-brand-500 opacity-100 scale-105' : 'border-white/20 opacity-60 hover:opacity-100 hover:scale-105'}"
+                  />
+                </button>
               {/each}
             </div>
           {/if}

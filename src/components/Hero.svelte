@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
   import gsap from "gsap";
   import ScrollTrigger from "gsap/ScrollTrigger";
-  import type { GitHubProfile } from "../lib/github";
+  import type { GitHubProfile } from "../lib/types";
   import profileData from "../data/profile.json";
   import { magnetic } from "../lib/actions";
   import ResumeModal from "./ResumeModal.svelte";
@@ -128,24 +128,24 @@
 
       <!-- Action Buttons -->
       <div
-        class="hero-item opacity-0 flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto relative"
+        class="hero-item opacity-0 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 w-full sm:w-auto relative"
       >
         <!-- Primary Button with Outer Glow -->
-        <div class="relative group/btn inline-block">
+        <div class="relative group/btn w-full sm:w-auto">
           <!-- Pulsing Glow Behind Button -->
           <div class="absolute -inset-1 bg-gradient-to-r from-brand-500 to-purple-500 rounded-full opacity-40 blur-md animate-pulse"></div>
           
           <button
             use:magnetic
-            on:click={() => showResumeModal = true}
-            class="magnetic-btn relative px-6 py-3 sm:px-8 sm:py-4 rounded-full bg-surface-900 border border-surface-700 hover:border-brand-500/50 hover:bg-surface-800 transition-all duration-300 shadow-xl hover:shadow-brand-500/30 text-white font-semibold text-base sm:text-lg overflow-hidden text-center flex items-center justify-center gap-3 z-10"
+            onclick={() => showResumeModal = true}
+            class="magnetic-btn w-full relative px-6 py-3 sm:px-8 sm:py-4 rounded-full bg-surface-900 border border-surface-700 hover:border-brand-500/50 hover:bg-surface-800 transition-all duration-300 shadow-xl hover:shadow-brand-500/30 text-white font-semibold text-base sm:text-lg overflow-hidden text-center flex items-center justify-center gap-3 z-10"
           >
             <!-- Hover Gradient Background Overlay -->
             <div
               class="absolute inset-0 bg-gradient-to-r from-brand-500/20 to-purple-500/20 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300 pointer-events-none"
             ></div>
             
-            <span class="relative z-10 flex items-center gap-2">
+            <span class="relative z-10 flex items-center justify-center gap-2">
               <svg class="w-5 h-5 text-brand-400 group-hover/btn:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
@@ -157,7 +157,7 @@
         <a
           use:magnetic
           href="#projects"
-          class="magnetic-btn px-6 py-3 sm:px-8 sm:py-4 rounded-full bg-surface-800/50 hover:bg-surface-700 text-gray-200 font-medium text-base sm:text-lg transition-all border border-surface-600 backdrop-blur-md text-center"
+          class="magnetic-btn w-full sm:w-auto px-6 py-3 sm:px-8 sm:py-4 rounded-full bg-surface-800/50 hover:bg-surface-700 text-gray-200 font-medium text-base sm:text-lg transition-all border border-surface-600 backdrop-blur-md text-center block"
         >
           View My Work
         </a>
