@@ -10,7 +10,7 @@
   let outerX = -100;
   let outerY = -100;
   
-  let isHovering = false;
+  let isHovering = $state(false);
 
   onMount(() => {
     if (window.matchMedia("(pointer: coarse)").matches) return;

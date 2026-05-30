@@ -7,18 +7,17 @@
   import { magnetic } from "../lib/actions";
   import ResumeModal from "./ResumeModal.svelte";
 
-  export let profile: GitHubProfile | null = null;
-  export let startTyping: boolean = false;
+  let { profile = null, startTyping = false }: { profile?: GitHubProfile | null, startTyping?: boolean } = $props();
 
   let bgRef: HTMLDivElement;
   let heroContentRef: HTMLDivElement;
 
   let baseText = "Hi, I'm ";
-  $: nameText = profileData.fullName;
-  $: fullText = baseText + nameText;
+  let nameText = $derived(profileData.fullName);
+  let fullText = $derived(baseText + nameText);
 
-  let animationTriggered = false;
-  let showResumeModal = false;
+  let animationTriggered = $state(false);
+  let showResumeModal = $state(false);
 
   onMount(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -38,33 +37,34 @@
     }
   });
 
-  // Cinematic staggered fade-up triggered when loading finishes
-  $: if (startTyping && heroContentRef && !animationTriggered) {
-    animationTriggered = true;
+  $effect(() => {
+    if (startTyping && heroContentRef && !animationTriggered) {
+      animationTriggered = true;
 
-    // Hide all children initially
-    const items = heroContentRef.querySelectorAll(".hero-item");
-    gsap.set(items, { opacity: 0, y: 30 });
-    gsap.set(".scroll-indicator", { opacity: 0 });
+      // Hide all children initially
+      const items = heroContentRef.querySelectorAll(".hero-item");
+      gsap.set(items, { opacity: 0, y: 30 });
+      gsap.set(".scroll-indicator", { opacity: 0 });
 
-    // Staggered reveal
-    gsap.to(items, {
-      y: 0,
-      opacity: 1,
-      duration: 1.2,
-      stagger: 0.2,
-      ease: "power4.out",
-      delay: 0.2,
-    });
+      // Staggered reveal
+      gsap.to(items, {
+        y: 0,
+        opacity: 1,
+        duration: 1.2,
+        stagger: 0.2,
+        ease: "power4.out",
+        delay: 0.2,
+      });
 
-    // Reveal scroll indicator last
-    gsap.to(".scroll-indicator", {
-      opacity: 1,
-      duration: 1,
-      delay: 1.5,
-      ease: "power2.out",
-    });
-  }
+      // Reveal scroll indicator last
+      gsap.to(".scroll-indicator", {
+        opacity: 1,
+        duration: 1,
+        delay: 1.5,
+        ease: "power2.out",
+      });
+    }
+  });
 </script>
 
 <section

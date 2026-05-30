@@ -86,8 +86,8 @@
   // Duplicate the array to create a seamless infinite loop
   const marqueeItems = [...skills, ...skills, ...skills, ...skills];
 
-  let selectedSkill: any = null;
-  let isModalOpen = false;
+  let selectedSkill: any = $state(null);
+  let isModalOpen = $state(false);
 
   function openModal(skill: any) {
     selectedSkill = skill;
@@ -114,11 +114,10 @@
 
   <div class="flex whitespace-nowrap animate-marquee">
     {#each marqueeItems as skill, i}
-      <!-- svelte-ignore a11y-click-events-have-key-events -->
-      <!-- svelte-ignore a11y-no-static-element-interactions -->
-      <div
-        class="flex items-center justify-center gap-3 px-8 sm:px-12 group cursor-pointer transition-transform hover:scale-110"
-        on:click={() => openModal(skill)}
+      <button
+        type="button"
+        class="flex items-center justify-center gap-3 px-8 sm:px-12 group cursor-pointer transition-transform hover:scale-110 outline-none"
+        onclick={() => openModal(skill)}
       >
         <img
           src={skill.icon}
@@ -130,7 +129,7 @@
         >
           {skill.name}
         </span>
-      </div>
+      </button>
     {/each}
   </div>
 </section>
@@ -142,11 +141,13 @@
       class="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6"
       transition:fade={{ duration: 300, easing: cubicOut }}
     >
-      <!-- svelte-ignore a11y-click-events-have-key-events -->
-      <!-- svelte-ignore a11y-no-static-element-interactions -->
       <div 
         class="absolute inset-0 bg-black/60 backdrop-blur-md" 
-        on:click={closeModal}
+        onclick={closeModal}
+        onkeydown={e => e.key === 'Enter' && closeModal()}
+        role="button"
+        tabindex="0"
+        aria-label="Close modal"
       ></div>
 
       <!-- Modal Content -->
@@ -156,7 +157,7 @@
       >
         <!-- Close Button -->
         <button 
-          on:click={closeModal}
+          onclick={closeModal}
           class="absolute top-4 right-4 p-2 bg-black/50 hover:bg-brand-500 rounded-full text-white backdrop-blur-sm transition-colors border border-white/10"
           aria-label="Close modal"
         >

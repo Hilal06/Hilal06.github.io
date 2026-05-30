@@ -2,17 +2,19 @@
   import { onMount, createEventDispatcher } from 'svelte';
   import gsap from 'gsap';
 
-  export let loading: boolean = true;
+  let { loading = true }: { loading: boolean } = $props();
   const dispatch = createEventDispatcher();
 
-  let progress = 0;
+  let progress = $state(0);
   let containerRef: HTMLDivElement;
   let textRef: HTMLDivElement;
+  let loadTween: gsap.core.Tween | null = null;
+  let hasCompleted = false;
 
   onMount(() => {
     // Artificial loading animation
     // Animate progress to 90% over 1.5 seconds minimum to ensure it looks good
-    gsap.to({ val: 0 }, {
+    loadTween = gsap.to({ val: 0 }, {
       val: 90,
       duration: 1.5,
       ease: "power2.out",
@@ -22,37 +24,46 @@
     });
   });
 
-  $: if (!loading && containerRef) {
-    // Finish loading and animate out
-    gsap.to({ val: progress }, {
-      val: 100,
-      duration: 0.4,
-      ease: "power2.inOut",
-      onUpdate: function() {
-        progress = Math.floor(this.targets()[0].val);
-      },
-      onComplete: () => {
-        // Fade and slide text out
-        gsap.to(textRef, {
-          y: -50,
-          opacity: 0,
-          duration: 0.4,
-          ease: "power3.in"
-        });
-        
-        // Slide container up to reveal the site
-        gsap.to(containerRef, {
-          yPercent: -100,
-          duration: 0.8,
-          ease: "power4.inOut",
-          delay: 0.2,
-          onComplete: () => {
-            dispatch('complete');
-          }
-        });
-      }
-    });
-  }
+  $effect(() => {
+    if (!loading && containerRef && !hasCompleted) {
+      hasCompleted = true; // prevent re-triggering
+      if (loadTween) loadTween.kill();
+
+      // Finish loading and animate out
+      gsap.to({ val: progress }, {
+        val: 100,
+        // Make the duration dependent on how much progress is left, but at least 0.5s
+        duration: Math.max(0.5, (100 - progress) * 0.015),
+        ease: "power2.out",
+        onUpdate: function() {
+          progress = Math.floor(this.targets()[0].val);
+        },
+        onComplete: () => {
+          // Pause at exactly 100% for half a second before animating out
+          setTimeout(() => {
+            // Fade and slide text out
+            gsap.to(textRef, {
+              y: -50,
+              opacity: 0,
+              duration: 0.4,
+              ease: "power3.in"
+            });
+            
+            // Slide container up to reveal the site
+            gsap.to(containerRef, {
+              yPercent: -100,
+              duration: 0.8,
+              ease: "power4.inOut",
+              delay: 0.2,
+              onComplete: () => {
+                dispatch('complete');
+              }
+            });
+          }, 500);
+        }
+      });
+    }
+  });
 </script>
 
 <div bind:this={containerRef} class="fixed inset-0 z-[9999] bg-surface-900 flex items-center justify-center overflow-hidden">
