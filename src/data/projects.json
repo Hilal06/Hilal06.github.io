@@ -1,43 +1,88 @@
 [
   {
-    "description": "High-end, industrial-grade Cold Chain Tracker Dashboard built with React, Vite, and Tailwind CSS. Features realistic telemetry charts and shipment tracking.",
-    "longDescription": "A robust, high-performance web dashboard engineered for logistics and supply chain management. This application visualizes real-time telemetry data, providing intuitive insights into temperature fluctuations and shipment statuses across the cold chain.",
-    "techStack": ["React", "Vite", "Tailwind CSS", "Recharts"],
-    "features": ["Real-time temperature telemetry visualization", "Interactive shipment tracking lists", "Responsive and premium industrial UI design"],
-    "screenshot": "./projects/cold-chain.png",
-    "images": [
-      "./projects/cold-chain.png",
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800",
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800"
-    ],
-    "html_url": "https://github.com/Hilal06/cold-chain-dashboard",
-    "isPrivate": false
-  },
-  {
     "description": "A cinematic, responsive wedding invitation website featuring micro-animations, calligraphy text reveals, and glowing UI elements.",
-    "longDescription": "An ethereal and cinematic digital wedding invitation designed to provide a premium user experience. Built with Svelte and GSAP, it features intricate scroll-triggered animations, glowing visual effects, and seamless transitions to create a memorable impression.",
-    "techStack": ["Svelte", "GSAP", "Tailwind CSS", "Vite"],
-    "features": ["Cinematic scroll-triggered micro-animations", "Responsive layout optimized for all devices", "Custom calligraphy text reveal effects"],
-    "screenshot": "./projects/wedding-ui.png",
+    "longDescription": "This project leverages modern frontend technologies combined with a lightweight, serverless backend approach, Frontend: React + TypeScript built with Vite, Styling: Tailwind CSS for responsive and highly customizable UI, Backend/Database: Google Apps Script serving as a REST API to read/write data to a Google Sheet.",
+    "techStack": [
+      "Svelte",
+      "GSAP",
+      "Tailwind CSS",
+      "Vite"
+    ],
+    "features": [
+      "Ethereal & Romantic Design: Premium floating floral accents, sophisticated typography, and soft palettes crafted for modern weddings",
+      "Fluid Animations: Scroll-driven fade-ins, falling petals, and smooth page transitions powered by Framer Motion",
+      "Headless Google Sheets CMS: Update names, dates, quotes, events, and RSVP data simply by editing a spreadsheet.",
+      "Smart Image Parsing: Automatically converts generic Google Drive shareable links into direct-view thumbnails for your gallery.",
+      "Live RSVP Management: Fully functioning RSVP submission form that securely posts incoming guest data directly back to your designated Google Sheet tab.",
+      "Atmospheric Audio: Built-in background music player with elegant UI controls."
+    ],
+    "screenshot": "./projects/wedding_inv/001.png",
+    "images": [
+      "./projects/wedding_inv/001.png",
+      "./projects/wedding_inv/002.png",
+      "./projects/wedding_inv/003.png",
+      "./projects/wedding_inv/004.png"
+    ],
     "html_url": "https://github.com/Hilal06/ethereal-wedding-invitation",
     "isPrivate": false
   },
   {
-    "description": "An automated, IoT-enabled DIY fish feeder designed for sleek aquariums. Features precise feeding controls and a modern aesthetic.",
-    "longDescription": "A complete IoT hardware and software solution for automated aquarium maintenance. This DIY fish feeder integrates microcontrollers with a custom web interface, allowing users to schedule feedings with precision while maintaining a sleek, modern look for their tank setup.",
-    "techStack": ["C++", "Arduino/ESP32", "IoT", "WebSockets"],
-    "features": ["Automated precision feeding schedules", "Real-time control via web interface", "Custom 3D-printable modern housing design"],
-    "screenshot": "./projects/fish-feeder.png",
+    "description": "An automated, IoT-enabled fish feeder designed aquariums. Features precise feeding controls and a modern aesthetic.",
+    "longDescription": "An automated, web-controlled fish feeder powered by a Wemos D1 Mini (ESP8266), an RTC module (DS3231 or DS1307), and a servo motor.",
+    "techStack": [
+      "C++",
+      "Arduino/ESP32",
+      "IoT",
+      "WebSockets"
+    ],
+    "features": [
+      "Premium Web Interface: A beautifully designed, mobile-responsive dashboard with a dark, glassmorphic UI, real-time logging, and system health status.",
+      "Dual Mode WiFi (AP + Station): The device broadcasts its own Access Point (FishFeeder_AP) to ensure you're never locked out, while simultaneously connecting to your home network.",
+      "Asynchronous WiFi Scanning: Easily find and connect to your home network using the built-in WiFi scanner and dropdown selector.",
+      "Dynamic Configuration: Set a daily automated feeding schedule and manage network credentials directly from the settings panel. Configurations are safely saved to the LittleFS filesystem.",
+      "Time Synchronization: Synchronize the integrated RTC clock seamlessly with your browser's time via the Web Interface with a single click.",
+      "Hardware Health Monitoring: Real-time visibility into RTC operational status and system errors directly on the dashboard.",
+      "Precision Feeding: Explicit 0-180 degree servo sweep ensures a full dispense during every feeding cycle."
+    ],
+    "screenshot": "./projects/fish-feeder/001.png",
+    "images": [
+      "./projects/fish-feeder/001.png",
+      "./projects/fish-feeder/002.png"
+    ],
     "html_url": "https://github.com/Hilal06/FishFeederDIY",
-    "isPrivate": true
+    "isPrivate": false
   },
   {
-    "description": "A modern, sleek, and cinematic IPTV application user interface dashboard displaying live channels and futuristic streaming layouts.",
-    "longDescription": "A next-generation user interface for IPTV streaming, conceptualized to mimic the premium feel of top-tier streaming services. The dashboard features dynamic channel browsing, live preview capabilities, and a highly polished dark-mode aesthetic for immersive viewing.",
-    "techStack": ["Vue.js/Svelte", "Tailwind CSS", "Video.js", "HLS"],
-    "features": ["Futuristic dark-mode UI design", "Live channel browsing and EPG layouts", "Smooth cinematic transitions between views"],
-    "screenshot": "./projects/iptv.png",
-    "html_url": "https://github.com/Sekte-StackOverflow/IPTV",
-    "isPrivate": true
+    "description": "An enterprise-grade, contactless attendance system powered by Laravel, React, and Python facial recognition for seamless ESP32-CAM hardware integration.",
+    "longDescription": "SmartAttend is a sophisticated, enterprise-ready attendance management platform designed for modern organizations. It combines a robust Laravel 12 backend with a dynamic React 19 (Inertia.js V2) frontend, Dockerized deployment, and an integrated Python Face Recognition Service to streamline HR operations. Designed for seamless integration with ESP32-CAM devices for contactless, facial recognition-based attendance.",
+    "techStack": [
+      "Laravel",
+      "Tailwind CSS",
+      "React.js",
+      "Python",
+      "Docker",
+      "Inertia.js",
+      "MySQL"
+    ],
+    "features": [
+      "Face Recognition: Contactless attendance via ESP32-CAM and a Python (Dlib) engine.",
+      "Auto-Enrollment & Sync: Instant face data setup with real-time, zero-restart synchronization.",
+      "Smart Directory: Full CRUD management for students, employees, teachers, and admins.",
+      "Attendance & Requests: Real-time status tracking alongside streamlined leave and remote work workflows.",
+      "HR Announcements: Targeted internal broadcasting system with variable priority levels.",
+      "Interactive Dashboards: Visual, real-time charts tracking weekly attendance trends.",
+      "AI Analyst: Automated, deep-dive textual attendance reports powered by Gemini AI.",
+      "Granular RBAC: Multi-tiered access control for Admins, Teachers, and Employees via Spatie.",
+      "Flexible Settings: Customizable schedules, late thresholds, and bilingual support (English/Indonesian)."
+    ],
+    "screenshot": "./projects/smartattend/001.png",
+    "images": [
+      "./projects/smartattend/001.png",
+      "./projects/smartattend/002.png",
+      "./projects/smartattend/003.png",
+      "./projects/smartattend/004.png"
+    ],
+    "html_url": "https://github.com/Hilal06/smart-attendanceESP32",
+    "isPrivate": false
   }
 ]

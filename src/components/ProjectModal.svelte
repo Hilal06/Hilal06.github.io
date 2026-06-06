@@ -9,6 +9,7 @@
   let { project = null, isOpen = false }: { project: Project | null, isOpen: boolean } = $props();
 
   let selectedImage = $state<string>('');
+  let isPreviewOpen = $state<boolean>(false);
 
   $effect(() => {
     if (project) {
@@ -23,8 +24,12 @@
   }
 
   function handleKeydown(event: KeyboardEvent) {
-    if (event.key === 'Escape' && isOpen) {
-      close();
+    if (event.key === 'Escape') {
+      if (isPreviewOpen) {
+        isPreviewOpen = false;
+      } else if (isOpen) {
+        close();
+      }
     }
   }
   
@@ -59,7 +64,7 @@
 
     <!-- Modal Content -->
     <div 
-      class="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-surface-900/85 backdrop-blur-2xl border border-white/10 rounded-3xl shadow-[0_0_50px_rgba(0,0,0,0.5)] overflow-hidden flex flex-col md:flex-row z-10"
+      class="relative w-full max-w-6xl max-h-[90vh] bg-surface-900/85 backdrop-blur-2xl border border-white/10 rounded-3xl shadow-[0_0_50px_rgba(0,0,0,0.5)] overflow-hidden flex flex-col md:flex-row z-10"
       transition:fly={{ y: 50, duration: 400, easing: cubicOut }}
     >
       <!-- Close Button -->
@@ -76,14 +81,26 @@
 
       <!-- Image Section -->
       {#if selectedImage}
-        <div class="w-full md:w-2/5 h-64 md:h-auto relative bg-surface-800 flex-shrink-0 flex flex-col justify-end overflow-hidden">
+        <div class="w-full md:w-1/2 lg:w-3/5 h-64 md:h-auto relative bg-surface-800 flex-shrink-0 flex flex-col justify-end overflow-hidden group">
           {#key selectedImage}
-            <img 
-              src={selectedImage} 
-              alt={project.name} 
-              class="absolute inset-0 w-full h-full object-cover"
-              in:fade={{ duration: 300 }}
-            />
+            <button 
+              class="absolute inset-0 w-full h-full cursor-zoom-in outline-none"
+              onclick={() => isPreviewOpen = true}
+              aria-label="View full image"
+            >
+              <img 
+                src={selectedImage} 
+                alt={project.name} 
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                in:fade={{ duration: 300 }}
+              />
+              <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                <div class="bg-black/50 text-white px-4 py-2 rounded-full backdrop-blur-sm flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+                  <span>Click to expand</span>
+                </div>
+              </div>
+            </button>
           {/key}
           <div class="absolute inset-0 bg-gradient-to-t from-surface-900 to-transparent md:bg-gradient-to-r md:from-transparent md:to-surface-900 pointer-events-none"></div>
           
@@ -112,7 +129,7 @@
       {/if}
 
       <!-- Content Section -->
-      <div class="p-8 md:p-10 flex-grow flex flex-col gap-6">
+      <div class="p-8 md:p-10 flex-grow flex flex-col gap-6 overflow-y-auto">
         <div>
           <h2 class="text-3xl md:text-4xl font-bold text-white mb-2">{project.name}</h2>
           <div class="flex items-center flex-wrap gap-3 text-sm text-gray-400">
@@ -171,7 +188,7 @@
           </div>
         {/if}
 
-        <div class="mt-auto pt-6">
+        <div class="mt-auto pt-6 pb-2 md:pb-4">
           {#if project.isPrivate}
             <button 
               disabled
@@ -201,4 +218,36 @@
       </div>
     </div>
   </div>
+
+  <!-- Full Screen Image Preview -->
+  {#if isPreviewOpen}
+    <div 
+      class="fixed inset-0 z-[200] flex items-center justify-center bg-black/95 backdrop-blur-xl p-4 sm:p-8"
+      transition:fade={{ duration: 200 }}
+    >
+      <button 
+        class="absolute inset-0 w-full h-full cursor-zoom-out outline-none"
+        onclick={() => isPreviewOpen = false}
+        aria-label="Close preview"
+      ></button>
+      
+      <button 
+        onclick={() => isPreviewOpen = false}
+        class="absolute top-4 right-4 z-50 p-3 bg-white/10 hover:bg-brand-500 rounded-full text-white backdrop-blur-sm transition-all duration-300 border border-white/20"
+        aria-label="Close preview"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <img 
+        src={selectedImage} 
+        alt="{project.name} full screen" 
+        class="relative max-w-full max-h-full object-contain z-10 rounded-lg shadow-2xl"
+        transition:fly={{ y: 20, duration: 300, easing: cubicOut }}
+      />
+    </div>
+  {/if}
 {/if}

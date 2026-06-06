@@ -1,8 +1,8 @@
 {
   "fullName": "Rifaul Hilal S",
-  "title": "IoT & Software Engineer",
-  "bio": "A passionate software developer building modern web applications, focusing on IoT, Server, and Software Dev.",
-  "aboutMe": "I'm a dedicated IoT & Software Engineer with a passion for building seamless, scalable, and high-performance applications. With a strong foundation in industrial systems and infrastructure, I bridge the gap between hardware and software to create impactful technological solutions.",
+  "title": "Backend and IoT Developer",
+  "bio": "I am a Back-End and IoT Developer with a strong foundation in Informatics Engineering. I specialize in bridging the gap between hardware and software, leveraging technologies like Laravel, React, and ESP32 to build deploy-ready platforms. From managing Dockerized homelab environments to engineering serverless backends, I am passionate about modern infrastructure, continuous deployment, and writing clean, scalable code.  ",
+  "aboutMe": "I am an Informatics Engineering graduate dedicated to building robust Web Back-End systems and innovative IoT solutions. My engineering philosophy centers on a hands-on, builder approach, whether I am developing full-stack web applications using Laravel and React, or designing custom IoT architectures with ESP32 microcontrollers, Node-RED, and Grafana. Through internships at multinational companies, I gained valuable experience in API integration and backend server development. Beyond writing code, I actively manage a microservices homelab using Ubuntu Server and Docker to continuously refine my DevOps and infrastructure skills. I am passionate about creating seamless integrations between hardware and software, and I am always looking for opportunities to solve complex problems and grow as an engineer.  ",
   "contact": {
     "whatsapp": "+6281234567890",
     "email": "rifaulhilal06@gmail.com"
