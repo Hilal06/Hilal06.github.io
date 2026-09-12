@@ -8,12 +8,15 @@
   import GlowOrb from './components/GlowOrb.svelte';
   import LoadingScreen from './components/LoadingScreen.svelte';
   import SkillsMarquee from './components/SkillsMarquee.svelte';
+  import Navbar from './components/Navbar.svelte';
   import { getProfile, getRepos } from './lib/github';
   import type { GitHubProfile, Project } from './lib/types';
   import projectsData from './data/projects.json';
   import Lenis from 'lenis';
   import gsap from 'gsap';
   import ScrollTrigger from 'gsap/ScrollTrigger';
+  import { currentTheme, setTheme } from './lib/theme';
+  import { get } from 'svelte/store';
   
   gsap.registerPlugin(ScrollTrigger);
   
@@ -25,6 +28,9 @@
   let lenisInstance = $state<any>(null);
 
   onMount(async () => {
+    // Initialize theme from saved storage
+    setTheme(get(currentTheme));
+
     // Force scroll to top on reload
     if (typeof window !== 'undefined') {
       window.history.scrollRestoration = 'manual';
@@ -100,11 +106,12 @@
 {/if}
 
 <main class="min-h-screen flex flex-col bg-surface-900 selection:bg-brand-500/30 selection:text-brand-200">
+  <Navbar />
   <GlowOrb />
   
   <div class="flex-grow relative overflow-hidden">
 
-    <div class="relative z-10">
+    <div class="relative">
       <Hero {profile} startTyping={!showLoader} />
       <About />
       <SkillsMarquee />

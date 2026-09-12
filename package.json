@@ -16,6 +16,7 @@
     "@types/node": "^24.12.3",
     "autoprefixer": "^10.5.0",
     "postcss": "^8.5.15",
+    "puppeteer": "^25.10.0",
     "svelte": "^5.55.5",
     "svelte-check": "^4.4.8",
     "tailwindcss": "^4.3.0",

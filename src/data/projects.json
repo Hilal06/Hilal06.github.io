@@ -1,58 +1,5 @@
 [
   {
-    "description": "A cinematic, responsive wedding invitation website featuring micro-animations, calligraphy text reveals, and glowing UI elements.",
-    "longDescription": "This project leverages modern frontend technologies combined with a lightweight, serverless backend approach, Frontend: React + TypeScript built with Vite, Styling: Tailwind CSS for responsive and highly customizable UI, Backend/Database: Google Apps Script serving as a REST API to read/write data to a Google Sheet.",
-    "techStack": [
-      "Svelte",
-      "GSAP",
-      "Tailwind CSS",
-      "Vite"
-    ],
-    "features": [
-      "Ethereal & Romantic Design: Premium floating floral accents, sophisticated typography, and soft palettes crafted for modern weddings",
-      "Fluid Animations: Scroll-driven fade-ins, falling petals, and smooth page transitions powered by Framer Motion",
-      "Headless Google Sheets CMS: Update names, dates, quotes, events, and RSVP data simply by editing a spreadsheet.",
-      "Smart Image Parsing: Automatically converts generic Google Drive shareable links into direct-view thumbnails for your gallery.",
-      "Live RSVP Management: Fully functioning RSVP submission form that securely posts incoming guest data directly back to your designated Google Sheet tab.",
-      "Atmospheric Audio: Built-in background music player with elegant UI controls."
-    ],
-    "screenshot": "./projects/wedding_inv/001.png",
-    "images": [
-      "./projects/wedding_inv/001.png",
-      "./projects/wedding_inv/002.png",
-      "./projects/wedding_inv/003.png",
-      "./projects/wedding_inv/004.png"
-    ],
-    "html_url": "https://github.com/Hilal06/ethereal-wedding-invitation",
-    "isPrivate": false
-  },
-  {
-    "description": "An automated, IoT-enabled fish feeder designed aquariums. Features precise feeding controls and a modern aesthetic.",
-    "longDescription": "An automated, web-controlled fish feeder powered by a Wemos D1 Mini (ESP8266), an RTC module (DS3231 or DS1307), and a servo motor.",
-    "techStack": [
-      "C++",
-      "Arduino/ESP32",
-      "IoT",
-      "WebSockets"
-    ],
-    "features": [
-      "Premium Web Interface: A beautifully designed, mobile-responsive dashboard with a dark, glassmorphic UI, real-time logging, and system health status.",
-      "Dual Mode WiFi (AP + Station): The device broadcasts its own Access Point (FishFeeder_AP) to ensure you're never locked out, while simultaneously connecting to your home network.",
-      "Asynchronous WiFi Scanning: Easily find and connect to your home network using the built-in WiFi scanner and dropdown selector.",
-      "Dynamic Configuration: Set a daily automated feeding schedule and manage network credentials directly from the settings panel. Configurations are safely saved to the LittleFS filesystem.",
-      "Time Synchronization: Synchronize the integrated RTC clock seamlessly with your browser's time via the Web Interface with a single click.",
-      "Hardware Health Monitoring: Real-time visibility into RTC operational status and system errors directly on the dashboard.",
-      "Precision Feeding: Explicit 0-180 degree servo sweep ensures a full dispense during every feeding cycle."
-    ],
-    "screenshot": "./projects/fish-feeder/001.png",
-    "images": [
-      "./projects/fish-feeder/001.png",
-      "./projects/fish-feeder/002.png"
-    ],
-    "html_url": "https://github.com/Hilal06/FishFeederDIY",
-    "isPrivate": false
-  },
-  {
     "description": "An enterprise-grade, contactless attendance system powered by Laravel, React, and Python facial recognition for seamless ESP32-CAM hardware integration.",
     "longDescription": "SmartAttend is a sophisticated, enterprise-ready attendance management platform designed for modern organizations. It combines a robust Laravel 12 backend with a dynamic React 19 (Inertia.js V2) frontend, Dockerized deployment, and an integrated Python Face Recognition Service to streamline HR operations. Designed for seamless integration with ESP32-CAM devices for contactless, facial recognition-based attendance.",
     "techStack": [
@@ -83,6 +30,131 @@
       "./projects/smartattend/004.png"
     ],
     "html_url": "https://github.com/Hilal06/smart-attendanceESP32",
+    "isPrivate": false
+  },
+  {
+    "description": "An automated, IoT-enabled fish feeder designed for aquariums. Features precise feeding controls and a modern aesthetic.",
+    "longDescription": "An automated, web-controlled fish feeder powered by a Wemos D1 Mini (ESP8266), an RTC module (DS3231 or DS1307), and a servo motor.",
+    "techStack": [
+      "C++",
+      "Arduino/ESP32",
+      "IoT",
+      "WebSockets"
+    ],
+    "features": [
+      "Premium Web Interface: A beautifully designed, mobile-responsive dashboard with a dark, glassmorphic UI, real-time logging, and system health status.",
+      "Dual Mode WiFi (AP + Station): The device broadcasts its own Access Point (FishFeeder_AP) to ensure you're never locked out, while simultaneously connecting to your home network.",
+      "Asynchronous WiFi Scanning: Easily find and connect to your home network using the built-in WiFi scanner and dropdown selector.",
+      "Dynamic Configuration: Set a daily automated feeding schedule and manage network credentials directly from the settings panel. Configurations are safely saved to the LittleFS filesystem.",
+      "Time Synchronization: Synchronize the integrated RTC clock seamlessly with your browser's time via the Web Interface with a single click.",
+      "Hardware Health Monitoring: Real-time visibility into RTC operational status and system errors directly on the dashboard.",
+      "Precision Feeding: Explicit 0-180 degree servo sweep ensures a full dispense during every feeding cycle."
+    ],
+    "screenshot": "./projects/fish-feeder/001.png",
+    "images": [
+      "./projects/fish-feeder/001.png",
+      "./projects/fish-feeder/002.png"
+    ],
+    "html_url": "https://github.com/Hilal06/FishFeederDIY",
+    "isPrivate": false
+  },
+  {
+    "description": "Modern, modular post-installation automation suite for Fedora & Ubuntu (KDE/GNOME) featuring an interactive TUI and dotfiles management.",
+    "longDescription": "A comprehensive Linux post-installation automation suite. Automates Fedora & Ubuntu OS setup with a clean terminal user interface (TUI), Zsh + Starship dev environment, multimedia codecs, ASUS ROG/TUF hardware tuning, and dotfiles backup/rollback.",
+    "techStack": [
+      "Bash",
+      "Shell",
+      "Linux",
+      "TUI",
+      "Python"
+    ],
+    "features": [
+      "Interactive TUI: Clean terminal user interface with progress indicators and bilingual support (EN/ID).",
+      "Fedora & Ubuntu Automation: Automated RPM Fusion, multimedia codecs, and dev tools installation.",
+      "Dev Environment Setup: Auto-configures Zsh shell, Starship prompt, git aliases, and terminal utilities.",
+      "Hardware Acceleration & Tuning: ASUS ROG/TUF gaming laptop kernel optimizations and power management.",
+      "Dotfiles Management: Safe backup, sync, and rollback mechanism for user configuration files."
+    ],
+    "screenshot": "./projects/linux-setup/001.png",
+    "images": [
+      "./projects/linux-setup/001.png"
+    ],
+    "html_url": "https://github.com/Hilal06/personal-fresh-linux-setup",
+    "isPrivate": false
+  },
+  {
+    "description": "Interactive TUI and automated batch application installer for Windows 10/11 using Winget and PowerShell.",
+    "longDescription": "An automated post-installation environment setup suite for Windows 10/11 powered by Python and Winget. Streamlines fresh OS installations by automating software installation, telemetry debloating, and system tweaks via an interactive terminal UI.",
+    "techStack": [
+      "Python",
+      "PowerShell",
+      "Winget",
+      "Windows",
+      "TUI"
+    ],
+    "features": [
+      "Winget Automation: Batch installs development tools, browsers, and utilities via official Windows Package Manager.",
+      "Interactive Python TUI: Terminal interface allowing selective software installation profiles.",
+      "System Tweaks & Debloat: Optional privacy enhancements, telemetry disabling, and performance optimizations.",
+      "Automated PowerShell Scripts: Generates reusable deployment scripts for fresh Windows setups."
+    ],
+    "screenshot": "./projects/win-setup/001.png",
+    "images": [
+      "./projects/win-setup/001.png"
+    ],
+    "html_url": "https://github.com/Hilal06/win-fresh-setup",
+    "isPrivate": false
+  },
+  {
+    "description": "A modern native Android wedding preparation manager built with Kotlin, Jetpack Compose (M3), Clean Architecture, and Supabase cloud sync.",
+    "longDescription": "Wed Planner is an offline-first native Android application engineered with Kotlin, Jetpack Compose (Material 3), and Clean Architecture. Features instant Room SQLite local transactions with asynchronous Supabase cloud sync, SHA-256 Content-Addressable Storage (CAS) for photo moodboards, and native PDF/CSV document export.",
+    "techStack": [
+      "Kotlin",
+      "Jetpack Compose",
+      "Room DB",
+      "Supabase",
+      "Android SDK",
+      "Coroutines & Flow"
+    ],
+    "features": [
+      "Offline-First Clean Architecture: Instant local Room SQLite transactions with background Supabase REST API cloud sync.",
+      "Jetpack Compose M3 UI: Modern native Android interface featuring Material You dynamic colors and Home Screen Widgets.",
+      "Content-Addressable Storage (CAS): SHA-256 hash-based photo management preventing duplicate disk & cloud storage.",
+      "Budget & Vendor Tracking: Multi-event budget calculation with payment milestones and linked vendor notes.",
+      "Native PDF & CSV Export: Built-in document export engine using Android PdfDocument Canvas API."
+    ],
+    "screenshot": "./projects/wed-planner/001.png",
+    "images": [
+      "./projects/wed-planner/001.png"
+    ],
+    "html_url": "https://github.com/Hilal06/Wed-Planner",
+    "isPrivate": true
+  },
+  {
+    "description": "A cinematic, responsive wedding invitation website featuring micro-animations, calligraphy text reveals, and glowing UI elements.",
+    "longDescription": "This project leverages modern frontend technologies combined with a lightweight, serverless backend approach, Frontend: Svelte + TypeScript built with Vite, Styling: Tailwind CSS for responsive and highly customizable UI, Backend/Database: Google Apps Script serving as a REST API to read/write data to a Google Sheet.",
+    "techStack": [
+      "Svelte",
+      "GSAP",
+      "Tailwind CSS",
+      "Vite"
+    ],
+    "features": [
+      "Ethereal & Romantic Design: Premium floating floral accents, sophisticated typography, and soft palettes crafted for modern weddings.",
+      "Fluid Animations: Scroll-driven fade-ins, falling petals, and smooth page transitions.",
+      "Headless Google Sheets CMS: Update names, dates, quotes, events, and RSVP data simply by editing a spreadsheet.",
+      "Smart Image Parsing: Automatically converts generic Google Drive shareable links into direct-view thumbnails for your gallery.",
+      "Live RSVP Management: Fully functioning RSVP submission form that securely posts incoming guest data directly back to your designated Google Sheet tab.",
+      "Atmospheric Audio: Built-in background music player with elegant UI controls."
+    ],
+    "screenshot": "./projects/wedding_inv/001.png",
+    "images": [
+      "./projects/wedding_inv/001.png",
+      "./projects/wedding_inv/002.png",
+      "./projects/wedding_inv/003.png",
+      "./projects/wedding_inv/004.png"
+    ],
+    "html_url": "https://github.com/Hilal06/ethereal-wedding-invitation",
     "isPrivate": false
   }
 ]

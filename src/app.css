@@ -1,29 +1,32 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand-50: #f4f6fc;
-  --color-brand-100: #e7ecf8;
-  --color-brand-200: #c9d6f0;
-  --color-brand-300: #9cb4e3;
-  --color-brand-400: #6a8dd2;
-  --color-brand-500: #466dbd;
-  --color-brand-600: #345398;
-  --color-brand-700: #2b437c;
-  --color-brand-800: #263866;
-  --color-brand-900: #233155;
-  --color-brand-950: #171f36;
+  --font-sans: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 
-  --color-surface-900: #0f1117;
-  --color-surface-800: #161821;
-  --color-surface-700: #1d212b;
-  --color-surface-600: #262b38;
+  --color-brand-50: #eef2ff;
+  --color-brand-100: #e0e7ff;
+  --color-brand-200: #c7d2fe;
+  --color-brand-300: #a5b4fc;
+  --color-brand-400: #818cf8;
+  --color-brand-500: #6366f1;
+  --color-brand-600: #4f46e5;
+  --color-brand-700: #4338ca;
+  --color-brand-800: #3730a3;
+  --color-brand-900: #312e81;
+  --color-brand-950: #1e1b4b;
+
+  --color-surface-900: #090d16;
+  --color-surface-800: #111726;
+  --color-surface-700: #1a2235;
+  --color-surface-600: #253047;
 }
 
 @layer base {
   body {
-    @apply bg-surface-900 text-gray-200 font-['Outfit',sans-serif] antialiased selection:bg-brand-500/30 selection:text-brand-200;
+    @apply bg-surface-900 text-gray-200 font-sans antialiased selection:bg-brand-500/30 selection:text-brand-200 transition-colors duration-300;
   }
-  
+
   /* Custom Scrollbar for a premium feel */
   ::-webkit-scrollbar {
     width: 8px;
@@ -35,4 +38,156 @@
   ::-webkit-scrollbar-thumb {
     @apply bg-surface-700 rounded-full border border-surface-600 hover:bg-brand-500/50 transition-colors;
   }
+}
+
+/* Background Developer Grid Pattern */
+.bg-developer-grid {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* ==========================================================================
+   Light Mode Custom Styles & Theme Overrides (WCAG AA Contrast Compliant)
+   ========================================================================== */
+html.light-mode body {
+  background-color: #f8fafc !important;
+  color: #1e293b !important;
+}
+
+html.light-mode .bg-surface-900 {
+  background-color: #f8fafc !important;
+}
+
+html.light-mode .bg-surface-950 {
+  background-color: #f1f5f9 !important;
+}
+
+html.light-mode .bg-surface-800 {
+  background-color: #ffffff !important;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05) !important;
+}
+
+html.light-mode .bg-surface-800\/80,
+html.light-mode .bg-surface-800\/60,
+html.light-mode .bg-surface-800\/50,
+html.light-mode .bg-surface-800\/40,
+html.light-mode .bg-surface-900\/95,
+html.light-mode .bg-surface-900\/70,
+html.light-mode .bg-surface-900\/90 {
+  background-color: rgba(255, 255, 255, 0.92) !important;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* Text High-Contrast Overrides */
+html.light-mode .text-white {
+  color: #0f172a !important;
+}
+
+html.light-mode .hero-title-gradient {
+  background-image: linear-gradient(to right, #0f172a 0%, #1e1b4b 50%, #4338ca 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+
+html.light-mode .text-gray-200,
+html.light-mode .text-gray-300 {
+  color: #334155 !important;
+}
+
+html.light-mode .text-gray-400 {
+  color: #64748b !important;
+}
+
+html.light-mode .text-brand-300 {
+  color: #4338ca !important; /* Deep Indigo 700 for clear contrast on light background */
+}
+
+html.light-mode .text-brand-400 {
+  color: #3730a3 !important; /* Solid Indigo 800 for subheadings & accents */
+}
+
+/* Skills Marquee Ticker in Light Mode */
+html.light-mode .marquee-container {
+  background-color: rgba(255, 255, 255, 0.75) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+html.light-mode .marquee-mask-left {
+  background-image: linear-gradient(to right, #f8fafc, transparent) !important;
+}
+
+html.light-mode .marquee-mask-right {
+  background-image: linear-gradient(to left, #f8fafc, transparent) !important;
+}
+
+html.light-mode .marquee-text {
+  color: #334155 !important;
+}
+
+html.light-mode .marquee-icon {
+  opacity: 0.85 !important;
+  filter: none !important;
+}
+
+/* Badge & Skill Pill Overrides */
+html.light-mode .bg-brand-500\/10,
+html.light-mode .bg-brand-500\/15,
+html.light-mode .bg-brand-500\/20 {
+  background-color: rgba(79, 70, 229, 0.08) !important;
+  border-color: rgba(79, 70, 229, 0.25) !important;
+}
+
+html.light-mode .border-white\/10 {
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Terminal Window Syntax Highlighting in Light Mode (Xcode Light / VS Code Light Style) */
+html.light-mode .text-purple-400 {
+  color: #7c3aed !important;
+}
+
+html.light-mode .text-emerald-300,
+html.light-mode .text-emerald-400 {
+  color: #047857 !important;
+}
+
+html.light-mode .text-amber-300 {
+  color: #b45309 !important;
+}
+
+/* Form Input Field Overrides in Light Mode */
+html.light-mode input[type="text"],
+html.light-mode input[type="email"],
+html.light-mode textarea {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+html.light-mode input::placeholder,
+html.light-mode textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* Modal Backdrop & Overlay Overrides */
+html.light-mode .bg-black\/80 {
+  background-color: rgba(15, 23, 42, 0.65) !important;
+}
+
+/* Developer Grid Pattern in Light Mode */
+html.light-mode .bg-developer-grid {
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px) !important;
+}
+
+html.light-mode ::-webkit-scrollbar-track {
+  background-color: #f8fafc !important;
+}
+
+html.light-mode ::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1 !important;
 }
