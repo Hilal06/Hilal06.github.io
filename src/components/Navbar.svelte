@@ -2,7 +2,7 @@
   import { magnetic } from '../lib/actions';
   import ResumeModal from './ResumeModal.svelte';
   import { t, currentLang, setLanguage } from '../lib/i18n';
-  import { currentTheme, toggleTheme } from '../lib/theme';
+  import { themeState } from '../lib/theme.svelte';
 
   let showResumeModal = $state(false);
   let isMobileMenuOpen = $state(false);
@@ -42,12 +42,12 @@
       <!-- Theme Switcher Button -->
       <button 
         use:magnetic
-        onclick={toggleTheme}
+        onclick={() => themeState.toggleTheme()}
         class="magnetic-btn p-2 rounded-full bg-surface-800 border border-white/10 text-gray-300 hover:text-white hover:border-brand-500/40 transition-all duration-300 flex items-center justify-center"
         aria-label="Toggle Light / Dark Mode"
         title="Toggle Theme"
       >
-        {#if $currentTheme === 'dark'}
+        {#if themeState.current === 'dark'}
           <!-- Sun Icon for Light Mode -->
           <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
@@ -91,11 +91,11 @@
     <div class="flex items-center gap-2 md:hidden">
       <!-- Mobile Theme Toggle -->
       <button 
-        onclick={toggleTheme}
+        onclick={() => themeState.toggleTheme()}
         class="p-1.5 rounded-full bg-surface-800 border border-white/10 text-gray-300 flex items-center justify-center"
         aria-label="Toggle Light / Dark Mode"
       >
-        {#if $currentTheme === 'dark'}
+        {#if themeState.current === 'dark'}
           <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
           </svg>

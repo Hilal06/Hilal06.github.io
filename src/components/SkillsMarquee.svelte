@@ -102,6 +102,10 @@
         <img
           src={skill.icon}
           alt="{skill.name} icon"
+          loading="lazy"
+          decoding="async"
+          width="32"
+          height="32"
           class="marquee-icon w-7 h-7 sm:w-8 sm:h-8 opacity-70 group-hover:opacity-100 transition-all drop-shadow-md duration-300"
         />
         <span

@@ -15,8 +15,7 @@
   import Lenis from 'lenis';
   import gsap from 'gsap';
   import ScrollTrigger from 'gsap/ScrollTrigger';
-  import { currentTheme, setTheme } from './lib/theme';
-  import { get } from 'svelte/store';
+  import { themeState } from './lib/theme.svelte';
   
   gsap.registerPlugin(ScrollTrigger);
   
@@ -27,9 +26,9 @@
   let showLoader = $state(true);
   let lenisInstance = $state<any>(null);
 
-  onMount(async () => {
+  onMount(() => {
     // Initialize theme from saved storage
-    setTheme(get(currentTheme));
+    themeState.setTheme(themeState.current);
 
     // Force scroll to top on reload
     if (typeof window !== 'undefined') {
@@ -46,55 +45,64 @@
     lenisInstance = lenis;
     lenis.stop(); // Disable scrolling while loader is active
 
-    lenis.on('scroll', ScrollTrigger.update);
+    const scrollHandler = () => ScrollTrigger.update();
+    lenis.on('scroll', scrollHandler);
 
-    gsap.ticker.add((time)=>{
-      lenis.raf(time * 1000)
-    });
+    const tickerHandler = (time: number) => {
+      lenis.raf(time * 1000);
+    };
 
+    gsap.ticker.add(tickerHandler);
     gsap.ticker.lagSmoothing(0, 0);
 
-    try {
-      profile = await getProfile('Hilal06');
-    } catch (err) {
-      console.error(err);
-      error = "Could not load profile.";
-    }
+    (async () => {
+      try {
+        profile = await getProfile('Hilal06');
+      } catch (err) {
+        console.error(err);
+      }
 
-    try {
-      // Fetch user repos (up to 100) to match with our local list
-      const githubRepos = await getRepos('Hilal06'); 
-      
-      repos = projectsData.map(localRepo => {
-        const ghRepo = githubRepos.find(r => r.html_url === localRepo.html_url);
-        if (ghRepo) {
+      try {
+        // Fetch user repos (up to 100) to match with our local list
+        const githubRepos = await getRepos('Hilal06'); 
+        
+        repos = projectsData.map(localRepo => {
+          const ghRepo = githubRepos.find(r => r.html_url === localRepo.html_url);
+          if (ghRepo) {
+            return {
+              ...(localRepo as Project),
+              name: ghRepo.name,
+              language: ghRepo.language,
+              updated_at: ghRepo.updated_at
+            };
+          }
+          
           return {
             ...(localRepo as Project),
-            name: ghRepo.name,
-            language: ghRepo.language,
-            updated_at: ghRepo.updated_at
+            name: localRepo.html_url.split('/').pop() || 'Project',
+            language: '',
+            updated_at: new Date().toISOString()
           };
-        }
-        
-        return {
-          ...(localRepo as Project),
-          name: localRepo.html_url.split('/').pop() || 'Project',
-          language: '',
-          updated_at: new Date().toISOString()
-        };
-      });
-    } catch (err) {
-      console.error("Could not fetch repo details", err);
-      // Fallback to just extracting names from URL
-      repos = projectsData.map(localRepo => ({
-          ...(localRepo as Project),
-          name: localRepo.html_url.split('/').pop() || 'Project',
-          language: '',
-          updated_at: new Date().toISOString()
-      }));
-    } finally {
-      loadingRepos = false;
-    }
+        });
+      } catch (err) {
+        console.error("Could not fetch repo details", err);
+        // Fallback to just extracting names from URL
+        repos = projectsData.map(localRepo => ({
+            ...(localRepo as Project),
+            name: localRepo.html_url.split('/').pop() || 'Project',
+            language: '',
+            updated_at: new Date().toISOString()
+        }));
+      } finally {
+        loadingRepos = false;
+      }
+    })();
+
+    return () => {
+      gsap.ticker.remove(tickerHandler);
+      lenis.off('scroll', scrollHandler);
+      lenis.destroy();
+    };
   });
 </script>
 

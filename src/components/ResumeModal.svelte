@@ -7,6 +7,9 @@
 
   let { isOpen = false, pdfUrl = './resume.pdf' }: { isOpen: boolean, pdfUrl?: string } = $props();
 
+  let modalRef = $state<HTMLElement | null>(null);
+  let previouslyFocusedElement: HTMLElement | null = null;
+
   const dispatch = createEventDispatcher();
 
   function close() {
@@ -17,14 +20,34 @@
     if (event.key === 'Escape' && isOpen) {
       close();
     }
+    if (event.key === 'Tab' && isOpen && modalRef) {
+      const focusables = modalRef.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
   }
   
   $effect(() => {
     if (typeof window !== 'undefined') {
       if (isOpen) {
+        previouslyFocusedElement = document.activeElement as HTMLElement;
         document.body.style.overflow = 'hidden';
+        setTimeout(() => {
+          modalRef?.focus();
+        }, 50);
       } else {
         document.body.style.overflow = '';
+        previouslyFocusedElement?.focus();
       }
     }
   });
@@ -36,8 +59,7 @@
   <!-- Backdrop -->
   <div 
     class="fixed inset-0 z-[200] flex items-center justify-center p-4 sm:p-6"
-    role="region"
-    aria-label="Resume modal container"
+    role="presentation"
     data-lenis-prevent
     onwheel={(e) => e.stopPropagation()}
     ontouchmove={(e) => e.stopPropagation()}
@@ -54,7 +76,12 @@
 
     <!-- Modal Content -->
     <div 
-      class="relative w-full max-w-5xl h-[85vh] bg-surface-900/95 backdrop-blur-2xl border border-white/10 rounded-3xl shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] overflow-hidden flex flex-col z-10 my-auto"
+      bind:this={modalRef}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="resume-modal-title"
+      tabindex="-1"
+      class="relative w-full max-w-5xl h-[85vh] bg-surface-900/95 backdrop-blur-2xl border border-white/10 rounded-3xl shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] overflow-hidden flex flex-col z-10 my-auto outline-none"
       data-lenis-prevent
       transition:fly={{ y: 50, duration: 400, easing: cubicOut }}
     >
@@ -62,7 +89,7 @@
       <div class="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-surface-950/80 shrink-0">
         <div class="flex items-center gap-3">
           <div class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></div>
-          <h2 class="text-base sm:text-lg font-bold text-white font-mono">{$t('resume.title')}</h2>
+          <h2 id="resume-modal-title" class="text-base sm:text-lg font-bold text-white font-mono">{$t('resume.title')}</h2>
         </div>
         
         <div class="flex items-center gap-3">

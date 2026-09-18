@@ -9,6 +9,8 @@
 
   let selectedImage = $state<string>('');
   let isPreviewOpen = $state<boolean>(false);
+  let modalRef = $state<HTMLElement | null>(null);
+  let previouslyFocusedElement: HTMLElement | null = null;
 
   $effect(() => {
     if (project) {
@@ -30,14 +32,34 @@
         close();
       }
     }
+    if (event.key === 'Tab' && isOpen && modalRef) {
+      const focusables = modalRef.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
   }
   
   $effect(() => {
     if (typeof window !== 'undefined') {
       if (isOpen) {
+        previouslyFocusedElement = document.activeElement as HTMLElement;
         document.body.style.overflow = 'hidden';
+        setTimeout(() => {
+          modalRef?.focus();
+        }, 50);
       } else {
         document.body.style.overflow = '';
+        previouslyFocusedElement?.focus();
       }
     }
   });
@@ -49,8 +71,7 @@
   <!-- Backdrop -->
   <div 
     class="fixed inset-0 z-[200] flex items-center justify-center p-4 sm:p-6"
-    role="region"
-    aria-label="Modal container"
+    role="presentation"
     data-lenis-prevent
     onwheel={(e) => e.stopPropagation()}
     ontouchmove={(e) => e.stopPropagation()}
@@ -67,7 +88,12 @@
 
     <!-- Modal Window Container -->
     <div 
-      class="relative w-full max-w-5xl max-h-[85vh] bg-surface-900/95 backdrop-blur-2xl border border-white/10 rounded-3xl shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] overflow-hidden flex flex-col z-10 my-auto"
+      bind:this={modalRef}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="project-modal-title"
+      tabindex="-1"
+      class="relative w-full max-w-5xl max-h-[85vh] bg-surface-900/95 backdrop-blur-2xl border border-white/10 rounded-3xl shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] overflow-hidden flex flex-col z-10 my-auto outline-none"
       data-lenis-prevent
       transition:fly={{ y: 50, duration: 400, easing: cubicOut }}
     >
@@ -116,6 +142,8 @@
                   <img 
                     src={selectedImage} 
                     alt={project.name} 
+                    loading="lazy"
+                    decoding="async"
                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     in:fade={{ duration: 300 }}
                   />
@@ -141,6 +169,8 @@
                     <img 
                       src={img} 
                       alt="{project.name} thumbnail" 
+                      loading="lazy"
+                      decoding="async"
                       class="w-20 h-14 object-cover rounded-xl border-2 transition-all block {selectedImage === img ? 'border-brand-500 scale-105 shadow-lg shadow-brand-500/20' : 'border-white/10 opacity-50 hover:opacity-100 hover:scale-105'}"
                     />
                   </button>
@@ -171,7 +201,7 @@
               {/if}
             </div>
 
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">{project.name}</h2>
+            <h2 id="project-modal-title" class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">{project.name}</h2>
           </div>
 
           <div class="w-full h-px bg-white/10"></div>
