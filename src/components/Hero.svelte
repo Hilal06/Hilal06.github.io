@@ -70,95 +70,120 @@
   });
 </script>
 
-<section id="hero" class="relative w-full min-h-[100dvh] flex flex-col items-center justify-center text-center overflow-hidden bg-[#f8fafc] bg-developer-grid pt-28 pb-16 lg:py-0">
+<section id="hero" class="relative w-full min-h-[100dvh] flex flex-col items-center justify-center text-center overflow-hidden bg-[var(--color-canvas)] bg-developer-grid pt-28 pb-16 lg:py-0">
   <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none" bind:this={bgRef}>
-    <div class="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-amber-400/15 rounded-full blur-[140px] mix-blend-multiply animate-pulse-slow"></div>
-    <div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-amber-500/10 rounded-full blur-[150px] mix-blend-multiply animate-pulse-slow"></div>
+    <div class="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-[var(--color-accent-500)]/10 blur-[140px] mix-blend-multiply animate-pulse-slow"></div>
+    <div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-[var(--color-accent-400)]/8 blur-[150px] mix-blend-multiply animate-pulse-slow"></div>
   </div>
   <div bind:this={heroContentRef} class="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-12 lg:px-24 flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
     <div class="flex flex-col items-center lg:items-start text-center lg:text-left flex-1 max-w-2xl font-mono">
-      <div class="bios-docket-bar mb-6 w-full p-2.5 bg-white border border-slate-200 shadow-sm flex items-center justify-between text-[11px] select-none">
-        <div class="flex items-center gap-2">
-          <span class="w-2 h-2 bg-amber-600 rounded-none inline-block animate-pulse"></span>
-          <span class="text-amber-700 font-bold uppercase tracking-wider">BOOT://HILAL_CORE v2026</span>
-        </div>
-        <span class="text-slate-500">ADDR: 0x7F // OK</span>
+      <!-- Stratum-style section tag -->
+      <div class="mb-6 w-full flex items-center gap-3 text-xs text-[var(--color-ink-muted)] tracking-widest uppercase select-none">
+        <span class="text-[var(--color-accent-500)] font-bold">00 —</span>
+        <span>BOOT://HILAL_CORE v2026</span>
+        <span class="flex-1 h-px bg-[var(--color-border)]"></span>
+        <span class="text-[10px]">ADDR: 0x7F // OK</span>
       </div>
 
-      <h1 class="text-4xl sm:text-6xl lg:text-[4.5rem] font-bold tracking-tight text-slate-950 mb-6 leading-[1.05]">
-        <span class="text-amber-600">&gt; </span><span>{fullText}</span>
+      <h1 class="text-4xl sm:text-6xl lg:text-[4.5rem] font-bold tracking-[-0.03em] text-[var(--color-ink-primary)] mb-6 leading-[1.05] text-left">
+        <span>{baseText}</span><span class="text-[var(--color-ink-secondary)]">{nameText}</span>
       </h1>
 
-      <div class="p-4 bg-white/80 border border-slate-200 shadow-sm mb-6 max-w-xl text-left">
-        <p class="text-sm sm:text-base text-slate-700 leading-relaxed font-sans font-normal">
+      <div class="p-5 bg-[var(--color-surface)] border border-[var(--color-border)] mb-6 max-w-xl text-left">
+        <p class="text-sm sm:text-base text-[var(--color-ink-secondary)] leading-relaxed font-sans font-normal">
           {$t('hero.bio')}
         </p>
       </div>
 
       <div class="flex flex-wrap justify-center lg:justify-start gap-2 mb-8">
         {#each hrBadges as item}
-          <div class="px-3 py-1.5 rounded-none bg-white border border-slate-200 text-xs text-slate-800 shadow-sm flex items-center gap-2">
-            <span class="text-amber-700 font-bold">&gt; {item.label}:</span>
-            <span class="text-slate-900 font-medium">{item.value}</span>
+          <div class="px-3 py-1.5 bg-[var(--color-surface)] border border-[var(--color-border)] text-xs flex items-center gap-2">
+            <span class="text-[var(--color-accent-500)] font-bold">{item.label}:</span>
+            <span class="text-[var(--color-ink-primary)] font-medium">{item.value}</span>
           </div>
         {/each}
       </div>
 
       <div class="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
-        <button onclick={() => showResumeModal = true} class="w-full sm:w-auto px-7 py-3 rounded-none bg-amber-600 hover:bg-amber-700 text-white border border-amber-600 font-mono font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 cursor-pointer shadow-sm transition-colors duration-100">
-          <span>[POST: {$t('hero.viewResume')}]</span>
+        <button onclick={() => showResumeModal = true} class="w-full sm:w-auto px-7 py-3 bg-[var(--color-accent-500)] hover:bg-[var(--color-accent-600)] text-white border border-[var(--color-accent-500)] font-mono font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 cursor-pointer shadow-sm transition-colors duration-150">
+          <span>{$t('hero.viewResume')}</span>
         </button>
-        <a href="#projects" class="w-full sm:w-auto px-7 py-3 rounded-none bg-white hover:bg-slate-100 text-slate-900 border border-slate-300 font-mono font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 cursor-pointer shadow-sm transition-colors duration-100">
-          <span>[JUMP: {$t('hero.exploreProjects')}]</span>
+        <a href="#projects" class="w-full sm:w-auto px-7 py-3 bg-[var(--color-surface-overlay)] hover:bg-[var(--color-surface)] text-[var(--color-ink-primary)] border border-[var(--color-border)] font-mono font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 cursor-pointer shadow-sm transition-colors duration-150">
+          <span>{$t('hero.exploreProjects')}</span>
         </a>
       </div>
     </div>
     <!-- Right side profile card -->
     <div class="w-full lg:w-[480px] flex-shrink-0 flex flex-col gap-5">
-      <div class="brutalist-badge rounded-none border border-slate-200 bg-white p-4 flex items-center gap-4 shadow-md transition-all duration-300">
+      <div class="border border-[var(--color-border)] bg-[var(--color-surface-overlay)] p-4 flex items-center gap-4 shadow-md transition-all duration-300">
         <!-- Square Avatar -->
-        <div class="w-16 h-16 rounded-none overflow-hidden bg-slate-100 border border-slate-200 shrink-0">
-          <img src={profile?.avatar_url || profileData.avatarUrl} alt={profileData.fullName} class="w-full h-full object-cover rounded-none" />
+        <div class="w-16 h-16 overflow-hidden bg-[var(--color-surface)] border border-[var(--color-border)] shrink-0">
+          <img src={profile?.avatar_url || profileData.avatarUrl} alt={profileData.fullName} class="w-full h-full object-cover" />
         </div>
 
         <div class="flex flex-col text-left">
-          <h3 class="text-base font-extrabold text-slate-900 tracking-tight">{profileData.fullName}</h3>
-          <p class="text-xs text-amber-700 font-mono mt-0.5">{$t('hero.terminalTitle')}</p>
-          <div class="flex items-center gap-2 mt-1.5 text-[10px] font-mono text-slate-500">
-            <span class="text-amber-600 font-bold">#</span>
-            <span class="text-slate-700">BACKEND // IOT SPECIALIST</span>
+          <h3 class="text-base font-extrabold text-[var(--color-ink-primary)] tracking-tight">{profileData.fullName}</h3>
+          <p class="text-xs text-[var(--color-accent-500)] font-mono mt-0.5">{$t('hero.terminalTitle')}</p>
+          <div class="flex items-center gap-2 mt-1.5 text-[10px] font-mono text-[var(--color-ink-muted)]">
+            <span class="text-[var(--color-accent-500)] font-bold">#</span>
+            <span class="text-[var(--color-ink-secondary)]">BACKEND // IOT SPECIALIST</span>
           </div>
         </div>
       </div>
-      <div class="docket-box rounded-none border border-slate-200 bg-white overflow-hidden text-left font-mono shadow-md transition-all duration-300">
+      <div class="terminal-v1 font-mono text-left shadow-lg overflow-hidden transition-all duration-300 border border-[var(--color-border)] bg-[var(--color-surface-overlay)] shadow-md">
         <!-- Top Technical Docket Strip -->
-        <div class="docket-header px-4 py-2 bg-slate-50 border-b border-slate-200 flex items-center justify-between text-[11px] text-slate-700">
+        <div class="terminal-v1-header px-4 py-2 flex items-center justify-between text-[11px] select-none">
           <div class="flex items-center gap-2">
-            <span class="w-1.5 h-1.5 bg-amber-600"></span>
-            <span class="font-bold text-slate-800">CONFIG // hilal.config.ts</span>
+            <span class="terminal-v1-dot w-2 h-2 inline-block"></span>
+            <span class="font-bold tracking-wider">CONFIG // hilal.config.ts</span>
           </div>
-          <span class="text-[10px] text-emerald-600 font-bold">[READY]</span>
+          <div class="flex items-center gap-2 text-[10px]">
+            <span class="terminal-v1-tag px-1.5 py-0.5 tracking-wider font-semibold">[READY]</span>
+            <span class="opacity-60 hidden sm:inline">branch: main*</span>
+          </div>
         </div>
 
-        <div class="p-5 text-xs text-slate-700 leading-relaxed bg-slate-50/50">
+        <!-- Code Body -->
+        <div class="terminal-v1-body p-5 text-xs leading-relaxed">
           <div class="space-y-1.5">
             <div>
-              <span class="text-amber-700 font-bold">export const</span>
-              <span class="text-slate-900 font-bold"> developer</span>
-              <span class="text-slate-600"> = </span>
-              <span class="text-slate-800">&#123;</span>
+              <span class="terminal-v1-keyword font-bold">export const</span>
+              <span class="terminal-v1-ident font-bold"> developer</span>
+              <span class="terminal-v1-punct"> = </span>
+              <span class="terminal-v1-bracket">&#123;</span>
             </div>
             <div class="pl-4">
-              <span class="text-slate-500">name:</span>
-              <span class="text-amber-800 font-medium"> "{profileData.fullName}"</span>,
+              <span class="terminal-v1-prop">name:</span>
+              <span class="terminal-v1-string font-medium"> "{profileData.fullName}"</span>,
             </div>
             <div class="pl-4">
-              <span class="text-slate-500">status:</span>
-              <span class="text-emerald-700 font-semibold"> "Available"</span>
+              <span class="terminal-v1-prop">focus:</span>
+              <span class="terminal-v1-string font-medium"> "Backend &amp; Embedded IoT"</span>,
+            </div>
+            <div class="pl-4">
+              <span class="terminal-v1-prop">status:</span>
+              <span class="terminal-v1-status font-semibold"> "Available"</span>
             </div>
             <div>
-              <span class="text-slate-800">&#125;</span>;
+              <span class="terminal-v1-bracket">&#125;</span>;
             </div>
+          </div>
+        </div>
+
+        <!-- Git Activity Telemetry Footer -->
+        <div class="terminal-v1-footer px-4 py-2.5 text-[10px] flex items-center justify-between gap-3 border-t select-none">
+          <div class="flex items-center gap-2 truncate">
+            <span class="terminal-v1-git-icon text-[11px] font-bold"></span>
+            <span class="text-white/70 truncate">git status: 240+ commits // clean</span>
+          </div>
+          <div class="flex items-center gap-1 shrink-0" title="Recent activity streak">
+            <span class="w-1.5 h-1.5 bg-emerald-500/30 inline-block"></span>
+            <span class="w-1.5 h-1.5 bg-emerald-500/50 inline-block"></span>
+            <span class="w-1.5 h-1.5 bg-emerald-500/80 inline-block"></span>
+            <span class="w-1.5 h-1.5 bg-emerald-400 inline-block"></span>
+            <span class="w-1.5 h-1.5 bg-emerald-400 inline-block"></span>
+            <span class="w-1.5 h-1.5 bg-emerald-500 inline-block"></span>
+            <span class="w-1.5 h-1.5 bg-emerald-400 animate-pulse inline-block"></span>
           </div>
         </div>
       </div>
@@ -181,6 +206,43 @@
     }
   }
   .animate-pulse-slow { animation: pulseSlow 8s ease-in-out infinite; }
-  .brutalist-badge { border-radius: 0 !important; }
-  .docket-box { border-radius: 0 !important; }
+  .terminal-v1 {
+    background-color: #121110;
+    border: 1px solid #2b2724;
+    border-radius: 0px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+  }
+  .terminal-v1-header {
+    background-color: #1a1816;
+    border-bottom: 1px solid #2b2724;
+    color: #a8a29e;
+  }
+  .terminal-v1-dot {
+    background-color: #e05730;
+    opacity: calc(0.7 + 0.6 * 0.3);
+  }
+  .terminal-v1-tag {
+    background-color: rgba(16, 185, 129, 0.15);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+  }
+  .terminal-v1-body {
+    background-color: #121110;
+    color: #d6d3d1;
+  }
+  .terminal-v1-keyword {
+    color: #e05730;
+    filter: saturate(calc(0.7 + 0.6 * 0.6));
+  }
+  .terminal-v1-ident { color: #fafaf9; }
+  .terminal-v1-punct, .terminal-v1-bracket { color: #78716c; }
+  .terminal-v1-prop { color: #a8a29e; }
+  .terminal-v1-string { color: #fb923c; }
+  .terminal-v1-status { color: #34d399; }
+  .terminal-v1-footer {
+    background-color: #161514;
+    border-color: #262320;
+    color: #a8a29e;
+  }
+  .terminal-v1-git-icon { color: #e05730; }
 </style>

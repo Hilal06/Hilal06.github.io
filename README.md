@@ -1,11 +1,12 @@
-# 🚀 Rifaul Hilal S — Software Engineer Portfolio
+# 🏛️ Rifaul Hilal S — Software Engineer Portfolio
 
-[![Live Demo](https://img.shields.io/badge/Live_Demo-hilal06.github.io-6366f1?style=for-the-badge&logo=github&logoColor=white)](https://hilal06.github.io)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-hilal06.github.io-d94e28?style=for-the-badge&logo=github&logoColor=white)](https://hilal06.github.io)
 [![Svelte 5](https://img.shields.io/badge/Svelte-5.0_Runes-FF3E00?style=for-the-badge&logo=svelte&logoColor=white)](https://svelte.dev)
 [![Tailwind CSS v4](https://img.shields.io/badge/Tailwind_CSS-v4.0-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-8.0-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
 
-A highly interactive, cinematic, and HR-optimized developer portfolio website built with **Svelte 5 (Runes)**, **Vite 8**, and **Tailwind CSS v4**. Designed specifically for **Backend, Native Android (Kotlin), and IoT Engineering** roles, featuring smooth GSAP animations, a bilingual i18n switcher, light & dark mode themes, and transparent project case studies.
+An architectural, developer-focused portfolio website engineered with **Svelte 5 (Runes)**, **Vite 8**, and **Tailwind CSS v4**. Crafted with the **Stratum Architectural Aesthetic** — featuring warm canvas tones, terracotta accents, brutalist sharp borders, and technical blueprint detailing. Tailored for **Backend, Systems, Native Android (Kotlin), and IoT Engineering** showcases.
 
 ---
 
@@ -15,49 +16,36 @@ A highly interactive, cinematic, and HR-optimized developer portfolio website bu
 
 ---
 
-## 📸 Preview & Screenshots
+## ✨ Architectural Highlights & Features
 
-<div align="center">
-
-### 🌙 Dark Mode (Default IDE Obsidian Theme)
-![Portfolio Dark Mode Preview](./screenshots/preview-dark.png)
-
-### ☀️ Light Mode (Clean Slate Theme)
-![Portfolio Light Mode Preview](./screenshots/preview-light.png)
-
-</div>
-
----
-
-## ✨ Key Features & HR UX Optimizations
-
-- **⚡ Svelte 5 Runes Architecture:** Built exclusively with Svelte 5 reactive primitives (`$state`, `$derived`, `$effect`, `$props`).
-- **🌐 Bilingual i18n Switcher (EN / ID):** Instant one-click language toggle (`🇬🇧 EN` | `🇮🇩 ID`) with persistent `localStorage` preference.
-- **☀️ Light & Dark Mode Toggle:** Fully customizable theme switcher with WCAG AA compliant contrast colors in both dark obsidian and light slate modes.
-- **🎯 Recruiter / HR Snapshot Widget:**
-  - Active status indicator (`🟢 Available for Full-time & Remote Roles`).
-  - Candidate quick info cards: Location (*East Java, ID*), Degree (*Informatics Engineering B.S.*), and Specialty (*Full-Stack, Native Android & IoT*).
-  - Verified Developer Photo Frame (`public/avatar.jpg`) with graceful fallback.
-  - Interactive terminal snippet (`hilal.config.ts`).
-- **💼 1-Click PDF Resume Modal:** Integrated CV viewer modal with direct PDF download button (`public/resume.pdf`).
-- **📁 Structured Project Showcase:**
-  - Multi-category domain filtering (`Android & Mobile`, `Full Stack`, `IoT & Embedded`, `Open Source`).
-  - IDE-styled detail popup modal featuring image gallery carousels, key architectural highlights, tech stack tags, and transparent Public/Private repo status.
-  - Isolated background scrolling with Lenis scroll lock (`data-lenis-prevent`).
-- **🔄 Live GitHub REST API Integration:** Dynamic repository statistics sync with fallback mechanisms.
-- **✉️ Direct Contact Form:** Powered by [Web3Forms](https://web3forms.com/) with a 1-click email copy widget (`rifaulhilal06@gmail.com`).
+- **⚡ Svelte 5 Runes Architecture:** Built exclusively with Svelte 5 reactive primitives (`$state`, `$derived`, `$effect`, `$props`) for clean and performant state handling.
+- **🏛️ Stratum Architectural Design System:**
+  - Warm stone palette (`#e8e5de` canvas, `#f2efe9` surfaces) paired with terracotta (`#d94e28`) precision accents.
+  - Brutalist sharp corners (`rounded-none`, 0px border-radius) and blueprint developer grid texturing.
+  - Dual-tone typography pairing **Outfit** and **JetBrains Mono**.
+- **💻 UNIX-Inspired Terminal Widgets:**
+  - **Hero Terminal:** Interactive `CONFIG // hilal.config.ts` console displaying live branch status (`main*`), weekly commit activity indicators, and developer telemetry.
+  - **Contact Dispatch Terminal:** Command-line styled form (`~/bin/dispatch-msg.sh`) with status beacon and styled prompt lines.
+- **🌐 Bilingual i18n Engine (EN / ID):** One-click language switching between English and Indonesian with persistent `localStorage` preference.
+- **📁 Structured Portfolio Case Studies:**
+  - Domain-based segmented filtering (*All*, *Android & Mobile*, *Full Stack*, *IoT & Embedded*, *Open Source*).
+  - Two-column technical modal dialog with image galleries, zoom preview, and Lenis scroll containment.
+  - **Architectural Schematic Fallback:** Graceful blueprint wireframe view with technical metadata for headless CLI projects or repositories without visual assets.
+- **💼 Interactive Resume Modal:** In-app CV preview modal with integrated download affordance.
+- **🔄 Live GitHub REST API Integration:** Dynamic repository and profile metadata fetching with automated offline fallback.
+- **✉️ Direct Dispatch Contact:** Powered by [Web3Forms](https://web3forms.com/) with quick clipboard email copy helper.
 
 ---
 
-## 🛠️ Technical Ecosystem & Tech Stack
+## 🛠️ Technical Ecosystem & Stack
 
-| Category | Primary Technologies |
+| Domain | Primary Technologies |
 | :--- | :--- |
-| **Backend & Cloud** | Laravel, PHP, NodeJS, Python, Supabase, PostgreSQL, MySQL, REST APIs, RabbitMQ |
+| **Backend & Systems** | Laravel, Node.js, Go, Python, Supabase, PostgreSQL, MySQL, REST APIs, Redis, Docker |
 | **Mobile Native** | Kotlin, Jetpack Compose (M3), Room SQLite DB, Android SDK, Coroutines & Flow |
-| **IoT & Embedded** | ESP32 / ESP8266, Arduino C++, MQTT Protocol, Node-RED, Grafana |
-| **DevOps & Linux** | Docker, Ubuntu / Fedora Server, Bash Scripting, TUI Automation, Git |
-| **Frontend Web** | Svelte 5, React (Inertia.js), TypeScript, Tailwind CSS v4, Vite 8, GSAP 3, Lenis |
+| **IoT & Embedded** | ESP32 / ESP8266, Arduino C++, MQTT, LittleFS, WebSockets |
+| **DevOps & Linux** | Docker, Fedora / Ubuntu Linux, Bash Automation, Charm Gum TUI, Git |
+| **Frontend & UI** | Svelte 5, TypeScript, Tailwind CSS v4, GSAP 3, Lenis Scroll, Vite 8 |
 
 ---
 
@@ -66,11 +54,11 @@ A highly interactive, cinematic, and HR-optimized developer portfolio website bu
 ### Prerequisites
 
 - **Node.js**: v18.0 or higher
-- **npm** / **yarn** / **pnpm**
+- **npm** / **pnpm** / **yarn**
 
-### Installation & Local Setup
+### Local Setup
 
-1. **Clone repository:**
+1. **Clone the repository:**
    ```bash
    git clone https://github.com/Hilal06/Hilal06.github.io.git
    cd Hilal06.github.io
@@ -87,12 +75,12 @@ A highly interactive, cinematic, and HR-optimized developer portfolio website bu
    ```
    Open `http://localhost:5173` in your browser.
 
-4. **Verify TypeScript & Svelte type safety:**
+4. **Run type checks:**
    ```bash
    npm run check
    ```
 
-5. **Build production bundle:**
+5. **Create production build:**
    ```bash
    npm run build
    ```
@@ -104,23 +92,37 @@ A highly interactive, cinematic, and HR-optimized developer portfolio website bu
 ```text
 Hilal06.github.io/
 ├── public/
-│   ├── avatar.jpg              # Personal profile photo
+│   ├── avatar.jpg              # Profile visual asset
 │   ├── resume.pdf              # Curriculum Vitae PDF
-│   └── projects/               # Case study preview images
-├── screenshots/
-│   ├── preview-dark.png        # Dark mode README preview
-│   └── preview-light.png       # Light mode README preview
+│   └── projects/               # Project screenshots & gallery assets
 ├── src/
-│   ├── components/             # Svelte UI components (Hero, About, Projects, etc.)
+│   ├── components/
+│   │   ├── About.svelte        # Experience & architectural dossier
+│   │   ├── Contact.svelte      # Terminal dispatch contact form
+│   │   ├── Footer.svelte       # Colophon & external links
+│   │   ├── GlowOrb.svelte      # Ambient lighting micro-element
+│   │   ├── Hero.svelte         # Primary introduction & terminal docket
+│   │   ├── LoadingScreen.svelte # Initial architectural loader
+│   │   ├── Navbar.svelte       # Top navigation & i18n controller
+│   │   ├── ProjectModal.svelte # Case study dialog & gallery
+│   │   ├── Projects.svelte     # Project list with schematic fallback
+│   │   ├── ResumeModal.svelte  # CV preview dialog
+│   │   └── SkillsMarquee.svelte# Tech stack ticker
 │   ├── data/
-│   │   ├── profile.json        # Candidate bio & contact information
-│   │   └── projects.json       # Featured portfolio case studies
+│   │   ├── profile.json        # Bio and profile data
+│   │   └── projects.json       # Case study details and metadata
 │   ├── lib/
-│   │   ├── i18n.ts             # Bilingual translation store (EN / ID)
-│   │   ├── theme.ts            # Light / Dark mode theme switcher
-│   │   └── github.ts           # GitHub REST API fetcher
-│   ├── app.css                 # Tailwind CSS v4 @theme configuration & Light Mode overrides
-│   └── App.svelte              # Main application root
+│   │   ├── actions.ts          # GSAP & magnetic interaction directives
+│   │   ├── github.ts           # GitHub REST API client
+│   │   ├── i18n.ts             # Bilingual translation store (EN/ID)
+│   │   ├── theme.svelte.ts     # Stratum theme state
+│   │   └── types.ts            # TypeScript definitions
+│   ├── app.css                 # Tailwind CSS v4 @theme design tokens
+│   ├── App.svelte              # Main portfolio application root
+│   └── main.ts                 # Svelte 5 mounting entry
+├── index.html                  # HTML entry point
+├── package.json
+└── vite.config.ts              # Vite 8 configuration
 ```
 
 ---

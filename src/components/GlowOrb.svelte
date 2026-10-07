@@ -41,6 +41,6 @@
 <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
   <div
     bind:this={orb}
-    class="absolute top-0 left-0 w-[60vw] h-[60vw] max-w-[800px] max-h-[800px] rounded-full blur-[100px] md:blur-[140px] bg-gradient-to-tr from-amber-400/15 via-amber-200/10 to-transparent opacity-70 will-change-transform mix-blend-multiply"
+    class="absolute top-0 left-0 w-[60vw] h-[60vw] max-w-[800px] max-h-[800px] rounded-full blur-[100px] md:blur-[140px] bg-gradient-to-tr from-[var(--color-accent-500)]/10 via-[var(--color-accent-200)]/8 to-transparent opacity-50 will-change-transform mix-blend-multiply"
   ></div>
 </div>

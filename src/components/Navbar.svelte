@@ -15,15 +15,15 @@
 </script>
 
 <header class="fixed top-5 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-6xl">
-  <nav class="relative flex items-center justify-between px-6 sm:px-10 py-3 rounded-none bg-white/95 border border-slate-200 shadow-md backdrop-blur-md transition-all duration-300">
-    <!-- Monolith Wordmark -->
-    <a href="#hero" class="flex items-center gap-2 font-mono font-extrabold text-lg text-slate-900 group">
-      <span class="text-amber-600 font-bold">&gt;</span>
+  <nav class="relative flex items-center justify-between px-6 sm:px-10 py-3 bg-[var(--color-surface-overlay)]/95 border border-[var(--color-border)] shadow-md backdrop-blur-md transition-all duration-300">
+    <!-- Wordmark -->
+    <a href="#hero" class="flex items-center gap-2 font-mono font-extrabold text-lg text-[var(--color-ink-primary)] group">
+      <span class="text-[var(--color-accent-500)] font-bold">&gt;</span>
       <span class="tracking-widest uppercase">HILAL06</span>
-      <span class="text-xs text-slate-500 font-normal ml-1">// MONOLITH</span>
+      <span class="text-xs text-[var(--color-ink-muted)] font-normal ml-1">// STRATUM</span>
     </a>
 
-    <!-- Swiss Column Links (Static In-Place Color Transition) -->
+    <!-- Navigation Links -->
     <div class="hidden md:flex items-center gap-6 font-mono text-xs">
       {#each navLinks as link, i}
         <a 
@@ -36,19 +36,19 @@
       {/each}
     </div>
 
-    <!-- Minimalist Utility Group -->
+    <!-- Utility Group -->
     <div class="hidden md:flex items-center gap-3">
-      <div class="flex items-center p-0.5 rounded-none bg-slate-100 border border-slate-200 text-xs font-mono">
+      <div class="flex items-center p-0.5 bg-[var(--color-surface)] border border-[var(--color-border)] text-xs font-mono">
         <button 
           onclick={() => setLanguage('en')}
-          class="px-2.5 py-1 rounded-none transition-all {$currentLang === 'en' ? 'bg-slate-900 text-white font-bold' : 'text-slate-600 hover:text-slate-900'}"
+          class="px-2.5 py-1 transition-all {$currentLang === 'en' ? 'bg-[var(--color-ink-primary)] text-white font-bold' : 'text-[var(--color-ink-secondary)] hover:text-[var(--color-ink-primary)]'}"
           aria-label="Switch to English"
         >
           EN
         </button>
         <button 
           onclick={() => setLanguage('id')}
-          class="px-2.5 py-1 rounded-none transition-all {$currentLang === 'id' ? 'bg-slate-900 text-white font-bold' : 'text-slate-600 hover:text-slate-900'}"
+          class="px-2.5 py-1 transition-all {$currentLang === 'id' ? 'bg-[var(--color-ink-primary)] text-white font-bold' : 'text-[var(--color-ink-secondary)] hover:text-[var(--color-ink-primary)]'}"
           aria-label="Switch to Indonesian"
         >
           ID
@@ -57,7 +57,7 @@
 
       <button 
         onclick={() => showResumeModal = true}
-        class="px-5 py-2 text-xs font-mono font-bold uppercase tracking-wider text-slate-900 hover:text-white bg-transparent hover:bg-amber-600 border border-amber-600/60 hover:border-amber-600 rounded-none cursor-pointer transition-all duration-200 hover:shadow-[0_0_12px_rgba(217,119,6,0.25)]"
+        class="px-5 py-2 text-xs font-mono font-bold uppercase tracking-wider text-[var(--color-ink-primary)] hover:text-white bg-transparent hover:bg-[var(--color-accent-500)] border border-[var(--color-accent-500)]/60 hover:border-[var(--color-accent-500)] cursor-pointer transition-all duration-200 hover:shadow-[0_0_12px_rgba(217,78,40,0.25)]"
       >
         DOSSIER
       </button>
@@ -65,16 +65,16 @@
 
     <!-- Mobile Navigation Toggle -->
     <div class="flex items-center gap-2 md:hidden">
-      <div class="flex items-center p-0.5 rounded-none bg-slate-100 border border-slate-200 text-xs font-mono mr-1">
+      <div class="flex items-center p-0.5 bg-[var(--color-surface)] border border-[var(--color-border)] text-xs font-mono mr-1">
         <button 
           onclick={() => setLanguage('en')}
-          class="px-2 py-0.5 rounded-none transition-all {$currentLang === 'en' ? 'bg-slate-900 text-white font-bold' : 'text-slate-600'}"
+          class="px-2 py-0.5 transition-all {$currentLang === 'en' ? 'bg-[var(--color-ink-primary)] text-white font-bold' : 'text-[var(--color-ink-secondary)]'}"
         >
           EN
         </button>
         <button 
           onclick={() => setLanguage('id')}
-          class="px-2 py-0.5 rounded-none transition-all {$currentLang === 'id' ? 'bg-slate-900 text-white font-bold' : 'text-slate-600'}"
+          class="px-2 py-0.5 transition-all {$currentLang === 'id' ? 'bg-[var(--color-ink-primary)] text-white font-bold' : 'text-[var(--color-ink-secondary)]'}"
         >
           ID
         </button>
@@ -82,7 +82,7 @@
 
       <button 
         onclick={() => isMobileMenuOpen = !isMobileMenuOpen}
-        class="p-2 rounded-none text-slate-900 border border-slate-200 bg-slate-100 hover:bg-slate-200"
+        class="p-2 text-[var(--color-ink-primary)] border border-[var(--color-border)] bg-[var(--color-surface)] hover:bg-[var(--color-surface-raised)]"
         aria-label="Toggle navigation menu"
       >
         <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -98,20 +98,20 @@
 
   <!-- Mobile Dropdown Menu -->
   {#if isMobileMenuOpen}
-    <div class="md:hidden mt-3 p-4 rounded-none bg-white/95 border border-slate-200 backdrop-blur-xl shadow-xl flex flex-col gap-2 animate-in fade-in slide-in-from-top-2 duration-300">
+    <div class="md:hidden mt-3 p-4 bg-[var(--color-surface-overlay)]/95 border border-[var(--color-border)] backdrop-blur-xl shadow-xl flex flex-col gap-2 animate-in fade-in slide-in-from-top-2 duration-300">
       {#each navLinks as link}
         <a 
           href={link.href} 
           onclick={() => isMobileMenuOpen = false}
-          class="px-4 py-2.5 text-sm font-medium text-slate-700 hover:text-slate-950 hover:bg-slate-100 rounded-none transition-all"
+          class="px-4 py-2.5 text-sm font-medium text-[var(--color-ink-secondary)] hover:text-[var(--color-ink-primary)] hover:bg-[var(--color-surface)] transition-all"
         >
           {link.name}
         </a>
       {/each}
-      <div class="h-px bg-slate-200 my-1"></div>
+      <div class="h-px bg-[var(--color-border)] my-1"></div>
       <button 
         onclick={() => { isMobileMenuOpen = false; showResumeModal = true; }}
-        class="w-full py-2.5 text-sm font-semibold text-white bg-amber-600 hover:bg-amber-700 rounded-none transition-all text-center"
+        class="w-full py-2.5 text-sm font-semibold text-white bg-[var(--color-accent-500)] hover:bg-[var(--color-accent-600)] transition-all text-center"
       >
         {$t('nav.resume')}
       </button>
@@ -124,18 +124,18 @@
 <style>
   .nav-link {
     position: relative;
-    color: #64748b;
+    color: var(--color-ink-muted);
     transition: color 150ms ease;
   }
   .nav-link:hover {
-    color: #0f172a;
+    color: var(--color-ink-primary);
   }
   .nav-link .nav-prefix {
-    color: #d97706;
+    color: var(--color-accent-500);
     transition: color 150ms ease;
   }
   .nav-link:hover .nav-prefix {
-    color: #b45309;
+    color: var(--color-accent-600);
   }
   .nav-link::after {
     content: '';
@@ -144,7 +144,7 @@
     left: 0;
     width: 0%;
     height: 2px;
-    background-color: #d97706;
+    background-color: var(--color-accent-500);
     transition: width 150ms ease;
   }
   .nav-link:hover::after {

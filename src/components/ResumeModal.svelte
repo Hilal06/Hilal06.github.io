@@ -66,7 +66,7 @@
     transition:fade={{ duration: 300, easing: cubicOut }}
   >
     <div 
-      class="absolute inset-0 bg-slate-900/60 backdrop-blur-md" 
+      class="absolute inset-0 bg-[var(--color-ink-primary)]/60 backdrop-blur-md" 
       onclick={close}
       onkeydown={e => e.key === 'Enter' && close()}
       role="button"
@@ -81,15 +81,15 @@
       aria-modal="true"
       aria-labelledby="resume-modal-title"
       tabindex="-1"
-      class="relative w-full max-w-5xl h-[85vh] bg-white border border-slate-200 rounded-none shadow-2xl overflow-hidden flex flex-col z-10 my-auto outline-none"
+      class="relative w-full max-w-5xl h-[85vh] bg-[var(--color-surface-overlay)] border border-[var(--color-border)] shadow-2xl overflow-hidden flex flex-col z-10 my-auto outline-none"
       data-lenis-prevent
       transition:fly={{ y: 50, duration: 400, easing: cubicOut }}
     >
       <!-- Header -->
-      <div class="flex items-center justify-between px-6 py-4 border-b border-slate-200 bg-slate-50 shrink-0">
+      <div class="flex items-center justify-between px-6 py-4 border-b border-[var(--color-border)] bg-[var(--color-surface)] shrink-0">
         <div class="flex items-center gap-3">
-          <div class="w-2.5 h-2.5 rounded-none bg-emerald-500 animate-pulse"></div>
-          <h2 id="resume-modal-title" class="text-base sm:text-lg font-bold text-slate-900 font-mono">{$t('resume.title')}</h2>
+          <div class="w-2.5 h-2.5 bg-[var(--color-status-ok)] animate-pulse"></div>
+          <h2 id="resume-modal-title" class="text-base sm:text-lg font-bold text-[var(--color-ink-primary)] font-mono">{$t('resume.title')}</h2>
         </div>
         
         <div class="flex items-center gap-3">
@@ -99,7 +99,7 @@
             target="_blank"
             rel="noopener noreferrer"
             download="Rifaul_Hilal_Resume.pdf"
-            class="magnetic-btn px-5 py-2 bg-amber-600 hover:bg-amber-700 text-white text-xs sm:text-sm font-mono font-bold rounded-none transition-all flex items-center gap-2 shadow-sm cursor-pointer"
+            class="magnetic-btn px-5 py-2 bg-[var(--color-accent-500)] hover:bg-[var(--color-accent-600)] text-white text-xs sm:text-sm font-mono font-bold transition-all flex items-center gap-2 shadow-sm cursor-pointer"
           >
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
@@ -108,7 +108,7 @@
           </a>
           <button 
             onclick={close}
-            class="p-2 hover:bg-slate-200 rounded-none text-slate-600 hover:text-slate-900 transition-colors cursor-pointer"
+            class="p-2 hover:bg-[var(--color-surface-raised)] text-[var(--color-ink-secondary)] hover:text-[var(--color-ink-primary)] transition-colors cursor-pointer"
             aria-label="Close modal"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -120,7 +120,7 @@
       </div>
 
       <!-- PDF Viewer -->
-      <div class="flex-grow w-full h-full bg-slate-100 relative">
+      <div class="flex-grow w-full h-full bg-[var(--color-surface)] relative">
         <iframe 
           src="{pdfUrl}#toolbar=0&navpanes=0" 
           title="Resume PDF" 

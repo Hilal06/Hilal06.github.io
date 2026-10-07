@@ -173,5 +173,25 @@
     ],
     "html_url": "https://github.com/Hilal06/ethereal-wedding-invitation",
     "isPrivate": false
+  },
+  {
+    "description": "Headless hardware sensor telemetry and thermal diagnostics daemon for Linux servers and embedded devices.",
+    "longDescription": "A lightweight, zero-overhead systems daemon written in Go for monitoring hardware sensors, thermal throttles, and systemdaemons in headless Linux environments without graphical display servers.",
+    "techStack": [
+      "Go",
+      "Linux",
+      "Systemd",
+      "CLI"
+    ],
+    "features": [
+      "Headless operation with zero display server dependency",
+      "Real-time sensor parsing via Linux sysfs and hwmon",
+      "Low memory footprint (< 12MB RAM resident)",
+      "Unix domain socket IPC for client queries"
+    ],
+    "screenshot": "",
+    "images": [],
+    "html_url": "https://github.com/Hilal06/sys-telemetry-daemon",
+    "isPrivate": false
   }
 ]

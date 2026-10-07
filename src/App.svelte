@@ -113,7 +113,7 @@
   }} />
 {/if}
 
-<main class="min-h-screen flex flex-col bg-[#f8fafc] text-slate-800 selection:bg-amber-500/20 selection:text-amber-900">
+<main class="min-h-screen flex flex-col bg-[var(--color-canvas)] text-[var(--color-ink-primary)] selection:bg-[var(--color-accent-500)]/20 selection:text-[var(--color-accent-900)]">
   <Navbar />
   <GlowOrb />
   

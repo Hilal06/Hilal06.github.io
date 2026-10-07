@@ -1,36 +1,50 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-sans: 'Inter', 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
 
-  --color-brand-50: #fffbeb;
-  --color-brand-100: #fef3c7;
-  --color-brand-200: #fde68a;
-  --color-brand-300: #fcd34d;
-  --color-brand-400: #fbbf24;
-  --color-brand-500: #f59e0b;
-  --color-brand-600: #d97706;
-  --color-brand-700: #b45309;
-  --color-brand-800: #92400e;
-  --color-brand-900: #78350f;
-  --color-brand-950: #451a03;
+  /* Stratum-inspired warm terracotta accent palette */
+  --color-accent-50: #fef3ed;
+  --color-accent-100: #fde2d0;
+  --color-accent-200: #fbc4a0;
+  --color-accent-300: #f89d68;
+  --color-accent-400: #f47236;
+  --color-accent-500: #d94e28;
+  --color-accent-600: #c43f1e;
+  --color-accent-700: #a33218;
+  --color-accent-800: #842a17;
+  --color-accent-900: #6b2316;
 
-  --color-surface-900: #f8fafc;
-  --color-surface-800: #ffffff;
-  --color-surface-700: #f1f5f9;
-  --color-surface-600: #e2e8f0;
+  /* Warm stone/sand surface palette */
+  --color-canvas: #e8e5de;
+  --color-surface: #f0eee8;
+  --color-surface-raised: #f5f3ef;
+  --color-surface-overlay: #ffffff;
+
+  /* Warm neutral text palette */
+  --color-ink-primary: #161616;
+  --color-ink-secondary: #71717a;
+  --color-ink-muted: #a1a09b;
+
+  /* Warm border palette */
+  --color-border: #c8c5bc;
+  --color-border-subtle: #d8d5cd;
+
+  /* Status colors */
+  --color-status-ok: #16a34a;
+  --color-status-warn: #d97706;
 }
 
 @layer base {
   html {
-    background-color: #f8fafc;
-    color: #0f172a;
+    background-color: var(--color-canvas);
+    color: var(--color-ink-primary);
   }
 
   body {
-    background-color: #f8fafc;
-    color: #1e293b;
+    background-color: var(--color-canvas);
+    color: var(--color-ink-primary);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -38,52 +52,56 @@
   }
 
   ::selection {
-    background-color: rgba(245, 158, 11, 0.25);
-    color: #78350f;
+    background-color: rgba(217, 78, 40, 0.2);
+    color: var(--color-accent-800);
   }
 
-  /* Custom Scrollbar */
+  /* Sharp-edged scrollbar */
   ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
   }
   ::-webkit-scrollbar-track {
-    background-color: #f1f5f9;
+    background-color: var(--color-canvas);
   }
   ::-webkit-scrollbar-thumb {
-    background-color: #cbd5e1;
+    background-color: var(--color-border);
     border-radius: 0px;
-    border: 1px solid #e2e8f0;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background-color: #f59e0b;
+    background-color: var(--color-accent-500);
+  }
+
+  /* Force sharp corners globally */
+  *, *::before, *::after {
+    border-radius: 0 !important;
   }
 }
 
-/* Background Developer Grid Pattern (Light Architectural Blueprint) */
+/* Warm architectural grid pattern */
 .bg-developer-grid {
   background-image: 
     linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
-  background-size: 32px 32px;
+  background-size: 40px 40px;
 }
 
-/* General Light Theme Form & Input Styles */
+/* General Form & Input Styles */
 input[type="text"],
 input[type="email"],
 textarea {
-  background-color: #ffffff;
-  color: #0f172a;
-  border-color: #cbd5e1;
+  background-color: var(--color-surface);
+  color: var(--color-ink-primary);
+  border-color: var(--color-border);
 }
 
 input::placeholder,
 textarea::placeholder {
-  color: #94a3b8;
+  color: var(--color-ink-muted);
 }
 
 /* Modal Backdrop */
 .modal-backdrop-light {
-  background-color: rgba(15, 23, 42, 0.45);
+  background-color: rgba(22, 22, 22, 0.55);
   backdrop-filter: blur(8px);
 }
