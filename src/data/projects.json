@@ -59,48 +59,65 @@
     "isPrivate": false
   },
   {
-    "description": "Modern, modular post-installation automation suite for Fedora & Ubuntu (KDE/GNOME) featuring an interactive TUI and dotfiles management.",
-    "longDescription": "A comprehensive Linux post-installation automation suite. Automates Fedora & Ubuntu OS setup with a clean terminal user interface (TUI), Zsh + Starship dev environment, multimedia codecs, ASUS ROG/TUF hardware tuning, and dotfiles backup/rollback.",
+    "description": "Modular post-installation automation script for Fedora and Ubuntu with an interactive Charm Gum TUI, developer runtimes, and system configurations.",
+    "longDescription": "A shell-based post-installation automation suite for Fedora Workstation and Ubuntu (GNOME/KDE). It streamlines OS setup through an interactive terminal interface (Charm Gum), installing essential development runtimes (fnm, uv, Docker, Go, Rust), configuring a customized Zsh and Starship environment, applying system codecs and VA-API hardware acceleration, and handling ASUS laptop hardware profiles (asusctl/supergfxctl).",
     "techStack": [
       "Bash",
-      "Shell",
       "Linux",
-      "TUI",
-      "Python"
+      "Charm Gum",
+      "Zsh",
+      "Docker",
+      "Flatpak"
     ],
     "features": [
-      "Interactive TUI: Clean terminal user interface with progress indicators and bilingual support (EN/ID).",
-      "Fedora & Ubuntu Automation: Automated RPM Fusion, multimedia codecs, and dev tools installation.",
-      "Dev Environment Setup: Auto-configures Zsh shell, Starship prompt, git aliases, and terminal utilities.",
-      "Hardware Acceleration & Tuning: ASUS ROG/TUF gaming laptop kernel optimizations and power management.",
-      "Dotfiles Management: Safe backup, sync, and rollback mechanism for user configuration files."
+      "Interactive Terminal UI: Modular menu system built with Charm Gum, featuring multi-select options, progress feedback, and bilingual support (EN/ID).",
+      "Curated Setup Profiles: One-shot installation presets for Minimal Developer, Full Workstation, Gaming & Creator, and ASUS ROG/TUF hardware.",
+      "Modern Dev Runtimes: Installs and configures fnm (Node.js), uv (Python), rustup, Go, OpenJDK, and Docker Engine without manual repository setup.",
+      "Shell & CLI Configuration: Configures Zsh with Starship prompt, Nerd Fonts, and modern CLI tools (eza, zoxide, bat, fastfetch).",
+      "ASUS ROG/TUF Integration: Manages dedicated Linux laptop controls including asusctl, GPU switching via supergfxctl, and battery charge thresholds.",
+      "Safety & System Recovery: Automated Btrfs/Timeshift snapshot triggers before heavy package execution, with full logging to ~/.cache."
     ],
-    "screenshot": "./projects/linux-setup/001.png",
+    "screenshot": "./projects/linux-setup/02_main_dashboard.png",
     "images": [
-      "./projects/linux-setup/001.png"
+      "./projects/linux-setup/02_main_dashboard.png",
+      "./projects/linux-setup/03_profiles_presets.png",
+      "./projects/linux-setup/04_setup_terminal.png",
+      "./projects/linux-setup/05_dev_runtimes.png",
+      "./projects/linux-setup/06_system_essentials.png",
+      "./projects/linux-setup/09_asus_setup.png",
+      "./projects/linux-setup/10_git_ssh_setup.png",
+      "./projects/linux-setup/13_health_check_summary.png"
     ],
     "html_url": "https://github.com/Hilal06/personal-fresh-linux-setup",
     "isPrivate": false
   },
   {
-    "description": "Interactive TUI and automated batch application installer for Windows 10/11 using Winget and PowerShell.",
-    "longDescription": "An automated post-installation environment setup suite for Windows 10/11 powered by Python and Winget. Streamlines fresh OS installations by automating software installation, telemetry debloating, and system tweaks via an interactive terminal UI.",
+    "description": "Interactive TUI and automation utility for fresh Windows 10/11 setups, featuring batch Winget app installations, debloating, and PowerShell tuning.",
+    "longDescription": "A Python and PowerShell automation tool designed to set up fresh Windows 10 and 11 environments quickly. Executable via a single-line PowerShell bootstrap without pre-installed Git, it provides an interactive TUI to batch-install software through Winget, remove pre-installed UWP bloatware, apply reversible registry and Explorer tweaks, and configure modern PowerShell with PSReadLine IntelliSense and Starship.",
     "techStack": [
       "Python",
       "PowerShell",
       "Winget",
       "Windows",
-      "TUI"
+      "Rich / TUI"
     ],
     "features": [
-      "Winget Automation: Batch installs development tools, browsers, and utilities via official Windows Package Manager.",
-      "Interactive Python TUI: Terminal interface allowing selective software installation profiles.",
-      "System Tweaks & Debloat: Optional privacy enhancements, telemetry disabling, and performance optimizations.",
-      "Automated PowerShell Scripts: Generates reusable deployment scripts for fresh Windows setups."
+      "One-Line Bootstrap: Runs directly from an elevated PowerShell command without requiring Git or pre-installed dependencies.",
+      "Winget Batch Installer: Interactive multi-select TUI powered by Python and Rich, backed by an editable catalog (apps.json) and persona presets.",
+      "PowerShell & Terminal Tuning: Automatically sets up PSReadLine predictive IntelliSense, Starship prompt, and standard Unix-like CLI aliases.",
+      "UWP Package Debloater: Selectively removes unnecessary pre-installed Windows UWP apps and telemetry services.",
+      "Reversible System Tweaks: Applies practical Windows UX adjustments (classic context menu, show extensions, taskbar end-task) with automatic registry backups and 1-click rollback.",
+      "Pre-Flight Diagnostics & Migration: Checks disk headroom, administrator privileges, and Winget connectivity; exports and imports setup configurations across machines."
     ],
-    "screenshot": "./projects/win-setup/001.png",
+    "screenshot": "./projects/win-setup/02_main_menu.png",
     "images": [
-      "./projects/win-setup/001.png"
+      "./projects/win-setup/02_main_menu.png",
+      "./projects/win-setup/03_select_install_apps.png",
+      "./projects/win-setup/04_persona_presets.png",
+      "./projects/win-setup/05_debloater.png",
+      "./projects/win-setup/06_system_tweaks.png",
+      "./projects/win-setup/07_shell_booster.png",
+      "./projects/win-setup/08_preflight_health.png"
     ],
     "html_url": "https://github.com/Hilal06/win-fresh-setup",
     "isPrivate": false

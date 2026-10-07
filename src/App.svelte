@@ -113,7 +113,7 @@
   }} />
 {/if}
 
-<main class="min-h-screen flex flex-col bg-surface-900 selection:bg-brand-500/30 selection:text-brand-200">
+<main class="min-h-screen flex flex-col bg-[#f8fafc] text-slate-800 selection:bg-amber-500/20 selection:text-amber-900">
   <Navbar />
   <GlowOrb />
   
@@ -121,7 +121,6 @@
 
     <div class="relative">
       <Hero {profile} startTyping={!showLoader} />
-      <About />
       <SkillsMarquee />
       
       {#if error}
@@ -133,6 +132,7 @@
       {/if}
 
       <Projects {repos} loading={loadingRepos} />
+      <About />
       <Contact />
     </div>
   </div>

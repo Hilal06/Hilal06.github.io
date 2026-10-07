@@ -66,12 +66,12 @@
   });
 </script>
 
-<div bind:this={containerRef} class="fixed inset-0 z-[9999] bg-surface-900 flex items-center justify-center overflow-hidden">
+<div bind:this={containerRef} class="fixed inset-0 z-[9999] bg-[#f8fafc] flex items-center justify-center overflow-hidden">
   <!-- Subtle background glow for aesthetics -->
-  <div class="absolute inset-0 bg-brand-500/5 blur-[150px] pointer-events-none"></div>
+  <div class="absolute inset-0 bg-amber-500/5 blur-[150px] pointer-events-none"></div>
   
   <div bind:this={textRef} class="relative text-7xl md:text-9xl font-black tracking-tighter tabular-nums flex items-baseline">
-    <span class="text-transparent bg-clip-text bg-gradient-to-br from-brand-300 via-purple-300 to-brand-500">{progress}</span>
-    <span class="text-4xl md:text-6xl text-brand-400 ml-1 opacity-50">%</span>
+    <span class="text-slate-900">{progress}</span>
+    <span class="text-4xl md:text-6xl text-amber-600 ml-1 opacity-70">%</span>
   </div>
 </div>

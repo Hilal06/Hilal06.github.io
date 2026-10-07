@@ -84,21 +84,14 @@
 <section
   id="marquee"
   use:reveal={{ y: 50, duration: 1, delay: 0.2 }}
-  class="marquee-container w-full py-8 border-y border-white/10 bg-surface-900/50 backdrop-blur-sm overflow-hidden relative z-10 select-none pointer-events-none"
+  class="marquee-container w-full py-6 border-y border-slate-200 bg-white overflow-hidden relative z-10 select-none pointer-events-none shadow-sm"
 >
-  <!-- Gradient Masks for edge fading -->
-  <div
-    class="marquee-mask-left absolute inset-y-0 left-0 w-20 sm:w-48 bg-gradient-to-r from-surface-900 to-transparent z-10 pointer-events-none"
-  ></div>
-  <div
-    class="marquee-mask-right absolute inset-y-0 right-0 w-20 sm:w-48 bg-gradient-to-l from-surface-900 to-transparent z-10 pointer-events-none"
-  ></div>
+  <div class="marquee-mask-left absolute inset-y-0 left-0 w-24 sm:w-48 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
+  <div class="marquee-mask-right absolute inset-y-0 right-0 w-24 sm:w-48 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
 
-  <div class="flex whitespace-nowrap animate-marquee">
+  <div class="flex whitespace-nowrap animate-marquee items-center">
     {#each marqueeItems as skill}
-      <div
-        class="flex items-center justify-center gap-3 px-8 sm:px-10 group"
-      >
+      <div class="flex items-center justify-center gap-3 px-8 sm:px-10 group">
         <img
           src={skill.icon}
           alt="{skill.name} icon"
@@ -106,11 +99,9 @@
           decoding="async"
           width="32"
           height="32"
-          class="marquee-icon w-7 h-7 sm:w-8 sm:h-8 opacity-70 group-hover:opacity-100 transition-all drop-shadow-md duration-300"
+          class="marquee-icon w-6 h-6 grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
         />
-        <span
-          class="marquee-text text-sm sm:text-base font-mono font-medium text-gray-300 group-hover:text-brand-300 transition-colors duration-300"
-        >
+        <span class="marquee-text text-xs sm:text-sm font-mono text-slate-600 group-hover:text-amber-700 transition-colors duration-300">
           {skill.name}
         </span>
       </div>

@@ -106,52 +106,56 @@
 >
   <!-- Header -->
   <div
-    class="flex flex-col gap-3"
+    class="flex flex-col gap-3.5 hud-container border-b border-slate-200 pb-6"
     use:reveal={{ y: 30, duration: 1 }}
   >
-    <h2 class="text-xs font-mono tracking-[0.3em] uppercase text-brand-400 font-semibold flex items-center gap-4">
-      <span class="w-12 h-[1px] bg-brand-400"></span>
-      {$t('about.subtitle')}
-    </h2>
-    <h3 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
-      {$t('about.title')}
+    <div class="flex items-center justify-between gap-4 font-mono text-[11px] text-slate-500 uppercase tracking-widest flex-wrap">
+      <div class="flex items-center gap-2.5">
+        <span class="telemetry-beacon rounded-none"></span>
+        <span class="text-amber-700 font-semibold">[SYS_LOC // 0x2A]</span>
+        <span class="text-slate-600">{$t('about.subtitle')}</span>
+      </div>
+      <div class="text-amber-700/80 text-[10px] hidden sm:block font-medium">
+        STATUS: SYS_ONLINE // COORD: -7.98° 112.63°
+      </div>
+    </div>
+
+    <h3 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-950 tracking-tight flex items-baseline gap-3">
+      <span class="text-amber-600 font-mono text-2xl sm:text-3xl select-none">&gt;</span>
+      <span>{$t('about.title')}</span>
     </h3>
   </div>
 
-  <!-- Bio & Highlights Grid -->
-  <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-    <!-- Left: Biography -->
-    <div
-      class="lg:col-span-7 flex flex-col gap-6"
-      use:reveal={{ y: 40, duration: 1, delay: 0.2 }}
-    >
-      <div class="p-8 rounded-3xl border border-white/10 bg-surface-800/40 backdrop-blur-xl shadow-xl flex flex-col gap-4">
-        <h4 class="text-xl font-bold text-white flex items-center gap-3">
-          <span class="w-2 h-6 rounded-full bg-brand-500"></span>
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start font-mono">
+    <!-- Left: Monolithic Architectural Statement -->
+    <div class="lg:col-span-7 flex flex-col gap-6">
+      <div class="p-8 sm:p-10 rounded-none border border-slate-200 bg-white shadow-sm flex flex-col gap-6">
+        <div class="text-[11px] uppercase tracking-[0.3em] text-slate-500 border-b border-slate-200 pb-3">
+          DOSSIER // ARCHITECTURAL DIRECTIVE
+        </div>
+        <h4 class="monolith-title font-extrabold text-slate-900 tracking-tight leading-tight">
           {$t('about.philosophyTitle')}
         </h4>
-        <p class="text-base sm:text-lg text-gray-300 leading-relaxed font-normal">
+        <p class="text-sm sm:text-base text-slate-700 leading-relaxed font-sans font-normal border-t border-slate-200 pt-4">
           {$t('about.philosophyBody')}
         </p>
       </div>
     </div>
 
-    <!-- Right: Highlights Cards -->
-    <div
-      class="lg:col-span-5 flex flex-col gap-4"
-      use:reveal={{ y: 40, duration: 1, delay: 0.3 }}
-    >
+    <!-- Right: Indexed Chronicle Rows -->
+    <div class="lg:col-span-5 flex flex-col divide-y divide-slate-200 border-t border-b border-slate-200">
       {#each highlights as item}
-        <div class="p-6 rounded-2xl border border-white/10 bg-surface-800/60 backdrop-blur-xl hover:border-brand-500/40 transition-all duration-300 flex flex-col gap-2 group">
-          <div class="flex items-center justify-between">
-            <span class="px-3 py-1 text-[10px] font-mono font-bold uppercase tracking-wider rounded-full bg-brand-500/20 text-brand-300 border border-brand-500/30">
-              {item.badge}
+        <div class="py-5 flex flex-col gap-2">
+          <div class="flex items-center justify-between text-xs">
+            <span class="text-amber-700 font-bold tracking-widest uppercase">
+              0{highlights.indexOf(item) + 1} // {item.badge}
             </span>
+            <span class="text-slate-400 text-[10px]">[VERIFIED]</span>
           </div>
-          <h5 class="text-base sm:text-lg font-bold text-white group-hover:text-brand-400 transition-colors">
+          <h5 class="text-base font-bold text-slate-900 leading-snug">
             {item.title}
           </h5>
-          <p class="text-xs sm:text-sm text-gray-400">
+          <p class="text-xs text-slate-600 font-sans leading-relaxed">
             {item.subtitle}
           </p>
         </div>
@@ -162,40 +166,38 @@
   <!-- Categorized Skills Ecosystem -->
   <div
     id="skills"
-    class="flex flex-col gap-8 pt-6 scroll-mt-32"
+    class="flex flex-col gap-8 pt-6 scroll-mt-32 font-mono"
     use:reveal={{ y: 40, duration: 1, delay: 0.4 }}
   >
-    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-      <h4 class="text-2xl font-extrabold text-white tracking-tight flex items-center gap-3">
-        {$t('about.ecosystemTitle')}
-      </h4>
-      <div class="flex items-center gap-4 text-xs font-mono text-gray-400">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200 pb-4">
+      <div>
+        <span class="text-[10px] uppercase tracking-widest text-amber-700 font-bold block mb-1">INDEX // TECHNICAL COMPETENCIES</span>
+        <h4 class="text-2xl font-extrabold text-slate-900 tracking-tight">
+          {$t('about.ecosystemTitle')}
+        </h4>
+      </div>
+      <div class="flex items-center gap-4 text-xs text-slate-500">
         <span class="flex items-center gap-1.5">
-          <span class="w-2 h-2 rounded-full bg-brand-400"></span> {$t('about.primaryLegend')}
+          <span class="w-2 h-2 bg-amber-500 rounded-none"></span> {$t('about.primaryLegend')}
         </span>
         <span class="flex items-center gap-1.5">
-          <span class="w-2 h-2 rounded-full bg-surface-600"></span> {$t('about.toolsLegend')}
+          <span class="w-2 h-2 bg-slate-300 rounded-none"></span> {$t('about.toolsLegend')}
         </span>
       </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="flex flex-col divide-y divide-slate-200 border-t border-b border-slate-200">
       {#each skillCategories as cat}
-        <div class="p-6 rounded-2xl border border-white/10 bg-surface-800/50 backdrop-blur-xl hover:border-brand-500/30 transition-all duration-300 flex flex-col gap-4">
-          <div class="flex items-center gap-3">
-            <div class="p-2.5 rounded-xl bg-brand-500/10 border border-brand-500/20 text-brand-400 shrink-0">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={cat.icon} />
-              </svg>
-            </div>
-            <h5 class="text-base font-bold text-white leading-snug">{$t(cat.titleKey)}</h5>
+        <div class="py-5 grid grid-cols-1 md:grid-cols-12 gap-4 items-start">
+          <div class="md:col-span-4 flex items-center gap-3">
+            <span class="text-amber-600 text-xs font-bold shrink-0">&gt;</span>
+            <span class="text-sm font-bold text-slate-900 uppercase tracking-wider">{$t(cat.titleKey)}</span>
           </div>
-
-          <div class="flex flex-wrap gap-2">
+          <div class="md:col-span-8 flex flex-wrap gap-2">
             {#each cat.skills as skill}
-              <span class="px-3 py-1 rounded-full text-xs font-mono transition-colors cursor-default border flex items-center gap-1.5 {skill.isPrimary ? 'bg-brand-500/15 border-brand-500/40 text-brand-300 font-semibold shadow-sm shadow-brand-500/10' : 'bg-surface-900 border-white/10 text-gray-300 hover:text-white hover:border-white/20'}">
+              <span class="px-2.5 py-1 text-xs border rounded-none transition-colors {skill.isPrimary ? 'bg-amber-50 border-amber-300 text-amber-800 font-semibold' : 'bg-slate-100 border-slate-200 text-slate-700 hover:text-slate-950 hover:bg-slate-200'}">
                 {#if skill.isPrimary}
-                  <span class="w-1.5 h-1.5 rounded-full bg-brand-400"></span>
+                  <span class="text-amber-600 mr-1">●</span>
                 {/if}
                 {skill.name}
               </span>
@@ -206,3 +208,14 @@
     </div>
   </div>
 </section>
+
+<style>
+  .monolith-title { font-size: calc(clamp(1.5rem, 3vw, 2.25rem) * 1); }
+  .telemetry-beacon {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background-color: #f59e0b;
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+</style>

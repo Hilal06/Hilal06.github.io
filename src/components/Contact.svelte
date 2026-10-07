@@ -53,189 +53,150 @@
   id="contact"
   class="py-32 px-6 sm:px-12 lg:px-24 max-w-7xl mx-auto relative z-10 w-full overflow-hidden"
 >
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
-    <!-- Left Column: Copy & Info -->
-    <div class="flex flex-col gap-8" use:reveal={{ y: 30, duration: 0.8 }}>
-      <div>
-        <h2
-          class="text-xs font-mono tracking-[0.3em] uppercase text-brand-400 font-semibold flex items-center gap-4 mb-6"
-        >
-          <span class="w-12 h-[1px] bg-brand-400"></span>
-          {$t('contact.subtitle')}
-        </h2>
-        <h3
-          class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.1]"
-        >
-          {$t('contact.title')}
-        </h3>
-      </div>
-
-      <p class="text-base sm:text-lg text-gray-300 leading-relaxed max-w-md">
-        {$t('contact.desc')}
-      </p>
-
-      <!-- Direct Contact Methods & Copy Box -->
-      <div class="flex flex-col gap-4 mt-2">
-        <!-- Interactive Email Copy Widget -->
-        <div class="p-4 rounded-2xl border border-white/10 bg-surface-800/80 backdrop-blur-xl flex items-center justify-between gap-4 max-w-md">
-          <div class="flex items-center gap-3 overflow-hidden">
-            <div class="p-2.5 rounded-xl bg-brand-500/10 border border-brand-500/20 text-brand-400 shrink-0">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <rect width="20" height="16" x="2" y="4" rx="2" stroke-width="2"></rect>
-                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" stroke-width="2"></path>
-              </svg>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+      <!-- Left Column -->
+        <div class="flex flex-col gap-8" use:reveal={{ y: 30, duration: 0.8 }}>
+          <div class="flex flex-col gap-6">
+            <div>
+              <div class="text-[10px] font-mono text-amber-700 font-bold tracking-widest uppercase mb-2 flex items-center gap-2">
+                <span>ROOT // COMM_CHANNEL_01</span>
+              </div>
+              <h3 class="display-title-v2 font-bold text-slate-950 flex items-baseline gap-2">
+                <span class="text-amber-600 select-none">&gt;</span>
+                <span>{$t('contact.title')}</span>
+              </h3>
             </div>
-            <span class="font-mono text-xs sm:text-sm text-gray-200 truncate font-medium">
-              {profileData.contact.email}
-            </span>
+
+            <div class="p-4 bg-white border border-slate-200 rounded-none shadow-sm">
+              <div class="text-[10px] font-mono text-amber-700 font-bold mb-1">// TRANSMISSION_PAYLOAD</div>
+              <p class="desc-v2 text-slate-700 font-mono">
+                {$t('contact.desc')}
+              </p>
+            </div>
           </div>
 
-          <button
-            type="button"
-            onclick={copyEmail}
-            class="px-4 py-2 text-xs font-mono font-semibold rounded-xl bg-brand-600 hover:bg-brand-500 text-white transition-all shrink-0 shadow-md"
-          >
-            {copied ? $t('contact.copied') : $t('contact.copyEmail')}
-          </button>
+          <div class="flex flex-col gap-4 mt-2">
+            <div class="p-4 rounded-none border border-slate-200 bg-white flex items-center justify-between gap-4 max-w-md shadow-md">
+              <div class="flex items-center gap-3 overflow-hidden">
+                <span class="w-2 h-2 bg-emerald-500 inline-block rounded-none shrink-0"></span>
+                <div class="flex flex-col truncate">
+                  <span class="text-[9px] font-mono text-slate-500 tracking-wider uppercase">[DIRECT_LINK]</span>
+                  <span class="font-mono text-xs sm:text-sm text-slate-900 truncate font-bold">
+                    {profileData.contact.email}
+                  </span>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onclick={copyEmail}
+                class="px-4 py-2 text-xs font-mono font-bold rounded-none bg-slate-900 hover:bg-amber-600 text-white transition-all shrink-0 cursor-pointer"
+              >
+                {copied ? $t('contact.copied') : $t('contact.copyEmail')}
+              </button>
+            </div>
+          </div>
+        </div>
+
+      <!-- Right Column: Terminal Form Panel -->
+      <div class="relative" use:reveal={{ y: 50, duration: 1, delay: 0.2 }}>
+        <div class="form-panel rounded-none border border-slate-200 bg-white overflow-hidden shadow-lg">
+          <!-- Terminal Topbar -->
+          <div class="terminal-bar px-6 py-2.5 bg-slate-50 border-b border-slate-200 flex items-center justify-between font-mono text-[11px] text-slate-600">
+            <div class="flex items-center gap-3">
+              <span class="text-slate-900 font-bold">~/dispatch/contact.sh</span>
+            </div>
+            <div class="flex items-center gap-2 text-[10px]">
+              <span class="w-1.5 h-1.5 bg-emerald-500"></span>
+              <span class="text-emerald-700 font-bold">ONLINE</span>
+            </div>
+          </div>
+
+          <form onsubmit={handleSubmit} class="p-8 sm:p-10 flex flex-col gap-6 rounded-none bg-white">
+            <input type="hidden" name="access_key" value={ACCESS_KEY} />
+            <input type="hidden" name="subject" value="New Submission from Portfolio" />
+
+            <div class="flex flex-col gap-2">
+              <label for="name-v2" class="text-xs font-mono font-semibold text-slate-800">
+                <span class="text-amber-700 font-bold">&gt;</span> {$t('contact.nameLabel')}
+              </label>
+              <input
+                type="text"
+                id="name-v2"
+                name="name"
+                required
+                placeholder={$t('contact.namePlaceholder')}
+                class="w-full bg-slate-50 border border-slate-300 focus:bg-white focus:border-amber-600 focus:ring-1 focus:ring-amber-500/30 rounded-none px-5 py-3.5 text-slate-900 placeholder-slate-400 outline-none transition-all text-sm font-sans"
+              />
+            </div>
+
+            <div class="flex flex-col gap-2">
+              <label for="email-v2" class="text-xs font-mono font-semibold text-slate-800">
+                <span class="text-amber-700 font-bold">&gt;</span> {$t('contact.emailLabel')}
+              </label>
+              <input
+                type="email"
+                id="email-v2"
+                name="email"
+                required
+                placeholder={$t('contact.emailPlaceholder')}
+                class="w-full bg-slate-50 border border-slate-300 focus:bg-white focus:border-amber-600 focus:ring-1 focus:ring-amber-500/30 rounded-none px-5 py-3.5 text-slate-900 placeholder-slate-400 outline-none transition-all text-sm font-sans"
+              />
+            </div>
+
+            <div class="flex flex-col gap-2">
+              <label for="message-v2" class="text-xs font-mono font-semibold text-slate-800">
+                <span class="text-amber-700 font-bold">&gt;</span> {$t('contact.messageLabel')}
+              </label>
+              <textarea
+                id="message-v2"
+                name="message"
+                required
+                rows="4"
+                placeholder={$t('contact.messagePlaceholder')}
+                class="w-full bg-slate-50 border border-slate-300 focus:bg-white focus:border-amber-600 focus:ring-1 focus:ring-amber-500/30 rounded-none px-5 py-3.5 text-slate-900 placeholder-slate-400 outline-none transition-all resize-y min-h-[120px] text-sm font-sans"
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              disabled={status === "loading" || status === "success"}
+              class="w-full mt-2 bg-amber-600 hover:bg-amber-700 text-white font-mono font-bold text-xs uppercase tracking-wider rounded-none px-6 py-4 transition-all disabled:opacity-70 disabled:cursor-not-allowed shadow-md cursor-pointer"
+            >
+              {#if status === "loading"}
+                <span class="flex items-center justify-center gap-2" in:fade>
+                  {$t('contact.sending')}
+                </span>
+              {:else if status === "success"}
+                <span class="flex items-center justify-center gap-2 text-white font-bold" in:fade>
+                  {$t('contact.successMsg')}
+                </span>
+              {:else if status === "error"}
+                <span class="flex items-center justify-center gap-2 text-red-200" in:fade>
+                  Error. Try again.
+                </span>
+              {:else}
+                <span class="flex items-center justify-center gap-2" in:fade>
+                  [DISPATCH] {$t('contact.sendBtn')}
+                </span>
+              {/if}
+            </button>
+          </form>
         </div>
       </div>
     </div>
-
-    <!-- Right Column: Form -->
-    <div class="relative" use:reveal={{ y: 50, duration: 1, delay: 0.2 }}>
-      <div
-        class="absolute -inset-4 bg-gradient-to-br from-brand-500/20 to-purple-500/20 rounded-3xl blur-2xl opacity-50 pointer-events-none"
-      ></div>
-
-      <form
-        onsubmit={handleSubmit}
-        class="relative bg-surface-800/80 backdrop-blur-xl border border-white/10 p-8 sm:p-10 rounded-3xl shadow-2xl flex flex-col gap-6"
-      >
-        <input type="hidden" name="access_key" value={ACCESS_KEY} />
-        <input
-          type="hidden"
-          name="subject"
-          value="New Submission from Portfolio"
-        />
-
-        <div class="flex flex-col gap-2">
-          <label for="name" class="text-xs font-mono font-medium text-gray-300 ml-1"
-            >{$t('contact.nameLabel')}</label
-          >
-          <input
-            type="text"
-            id="name"
-            name="name"
-            required
-            placeholder={$t('contact.namePlaceholder')}
-            class="w-full bg-surface-900 border border-white/10 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 rounded-xl px-5 py-4 text-white placeholder-gray-500 outline-none transition-all duration-300 text-sm"
-          />
-        </div>
-
-        <div class="flex flex-col gap-2">
-          <label for="email" class="text-xs font-mono font-medium text-gray-300 ml-1"
-            >{$t('contact.emailLabel')}</label
-          >
-          <input
-            type="email"
-            id="email"
-            name="email"
-            required
-            placeholder={$t('contact.emailPlaceholder')}
-            class="w-full bg-surface-900 border border-white/10 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 rounded-xl px-5 py-4 text-white placeholder-gray-500 outline-none transition-all duration-300 text-sm"
-          />
-        </div>
-
-        <div class="flex flex-col gap-2">
-          <label for="message" class="text-xs font-mono font-medium text-gray-300 ml-1"
-            >{$t('contact.messageLabel')}</label
-          >
-          <textarea
-            id="message"
-            name="message"
-            required
-            rows="4"
-            placeholder={$t('contact.messagePlaceholder')}
-            class="w-full bg-surface-900 border border-white/10 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 rounded-xl px-5 py-4 text-white placeholder-gray-500 outline-none transition-all duration-300 resize-y min-h-[120px] text-sm"
-          ></textarea>
-        </div>
-
-        <button
-          type="submit"
-          disabled={status === "loading" || status === "success"}
-          class="w-full mt-2 relative overflow-hidden group bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl px-6 py-4 transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed hover:shadow-lg hover:shadow-brand-500/25 active:scale-[0.98]"
-        >
-          {#if status === "loading"}
-            <span class="flex items-center justify-center gap-2" in:fade>
-              <svg
-                class="animate-spin -ml-1 mr-2 h-5 w-5 text-white"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <circle
-                  class="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  stroke-width="4"
-                ></circle>
-                <path
-                  class="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                ></path>
-              </svg>
-              {$t('contact.sending')}
-            </span>
-          {:else if status === "success"}
-            <span class="flex items-center justify-center gap-2" in:fade>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                <polyline points="22 4 12 14.01 9 11.01"></polyline>
-              </svg>
-              {$t('contact.successMsg')}
-            </span>
-          {:else if status === "error"}
-            <span
-              class="flex items-center justify-center gap-2 text-red-100"
-              in:fade
-            >
-              Error. Try again.
-            </span>
-          {:else}
-            <span class="flex items-center justify-center gap-2" in:fade>
-              {$t('contact.sendBtn')}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"
-              >
-                <line x1="22" y1="2" x2="11" y2="13"></line>
-                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-              </svg>
-            </span>
-          {/if}
-        </button>
-      </form>
-    </div>
-  </div>
 </section>
+
+<style>
+  .display-title-v2 {
+    font-size: calc(clamp(2.15rem, 4.5vw, 3.5rem) * 0.9);
+    line-height: 1.15;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.05em;
+  }
+  .desc-v2 {
+    font-size: calc(0.95rem * 0.9);
+    line-height: 1.8;
+    max-width: 54ch;
+  }
+</style>

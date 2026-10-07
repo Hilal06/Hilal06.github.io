@@ -1,34 +1,28 @@
-export type Theme = 'dark' | 'light';
+export type Theme = 'light';
 
 class ThemeState {
-  current = $state<Theme>('dark');
+  current = $state<Theme>('light');
 
   constructor() {
     if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('portfolio_theme') as Theme;
-      if (saved === 'dark' || saved === 'light') {
-        this.current = saved;
-      }
+      localStorage.setItem('portfolio_theme', 'light');
+      document.documentElement.classList.add('light-mode');
+      document.documentElement.classList.remove('dark-mode');
     }
   }
 
-  setTheme(theme: Theme) {
-    this.current = theme;
+  setTheme(theme: Theme = 'light') {
+    this.current = 'light';
     if (typeof window !== 'undefined') {
-      localStorage.setItem('portfolio_theme', theme);
-      if (theme === 'light') {
-        document.documentElement.classList.add('light-mode');
-        document.documentElement.classList.remove('dark-mode');
-      } else {
-        document.documentElement.classList.add('dark-mode');
-        document.documentElement.classList.remove('light-mode');
-      }
+      localStorage.setItem('portfolio_theme', 'light');
+      document.documentElement.classList.add('light-mode');
+      document.documentElement.classList.remove('dark-mode');
     }
   }
 
   toggleTheme = () => {
-    const next = this.current === 'dark' ? 'light' : 'dark';
-    this.setTheme(next);
+    // Permanent light mode
+    this.setTheme('light');
   };
 }
 

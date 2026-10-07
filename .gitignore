@@ -25,4 +25,6 @@ dist-ssr
 
 # Agent local configuration
 .agents/mcp.json
+.impeccable/
+.codex/
 
