@@ -143,7 +143,11 @@
     ],
     "screenshot": "./projects/wed-planner/001.png",
     "images": [
-      "./projects/wed-planner/001.png"
+      "./projects/wed-planner/001.png",
+      "./projects/wed-planner/002.png",
+      "./projects/wed-planner/003.png",
+      "./projects/wed-planner/004.png",
+      "./projects/wed-planner/005.png"
     ],
     "html_url": "https://github.com/Hilal06/Wed-Planner",
     "isPrivate": true
