@@ -10,9 +10,29 @@
   let isModalOpen = $state(false);
   let activeFilter = $state<string>('All');
   let imageErrors = $state<Record<string, boolean>>({});
+  let portraitImages = $state<Record<string, boolean>>({});
 
   function handleImageError(name: string) {
     imageErrors[name] = true;
+  }
+
+  function detectPortrait(node: HTMLImageElement, name: string) {
+    function check() {
+      // Check if image is portrait / mobile view (height significantly larger than width)
+      if (node.naturalHeight > node.naturalWidth * 1.2) {
+        portraitImages[name] = true;
+      }
+    }
+    if (node.complete && node.naturalWidth > 0) {
+      check();
+    } else {
+      node.addEventListener('load', check, { once: true });
+    }
+    return {
+      destroy() {
+        node.removeEventListener('load', check);
+      }
+    };
   }
 
   let categories = $derived([
@@ -126,14 +146,24 @@
             <div class="lg:col-span-5 w-full">
               <div class="relative w-full aspect-video overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)]">
                 {#if repo.screenshot && !imageErrors[repo.name]}
-                  <img 
-                    src={repo.screenshot} 
-                    alt={repo.name} 
-                    loading="lazy"
-                    decoding="async"
-                    onerror={() => handleImageError(repo.name)}
-                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
-                  />
+                  {#if portraitImages[repo.name]}
+                    <div 
+                      class="absolute inset-0 bg-cover bg-top blur-xl opacity-35 scale-110 pointer-events-none" 
+                      style="background-image: url('{repo.screenshot}')"
+                      aria-hidden="true"
+                    ></div>
+                  {/if}
+                  <div class="relative w-full h-full flex justify-center items-start overflow-hidden">
+                    <img 
+                      src={repo.screenshot} 
+                      alt={repo.name} 
+                      loading="lazy"
+                      decoding="async"
+                      onerror={() => handleImageError(repo.name)}
+                      use:detectPortrait={repo.name}
+                      class="transition-transform duration-500 origin-top {portraitImages[repo.name] ? 'h-[300%] w-auto max-w-none object-contain object-top group-hover:scale-[1.03] shadow-sm' : 'w-full h-full object-cover group-hover:scale-105'}" 
+                    />
+                  </div>
                 {:else}
                   <!-- Architectural Schematic Fallback for Missing / Broken Image -->
                   <div class="w-full h-full flex flex-col justify-between p-4 sm:p-5 bg-[var(--color-surface)] relative select-none overflow-hidden border border-dashed border-[var(--color-border)]">
