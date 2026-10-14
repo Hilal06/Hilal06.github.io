@@ -27,7 +27,8 @@
       "./projects/smartattend/001.png",
       "./projects/smartattend/002.png",
       "./projects/smartattend/003.png",
-      "./projects/smartattend/004.png"
+      "./projects/smartattend/004.png",
+      "./projects/smartattend/005.png"
     ],
     "html_url": "https://github.com/Hilal06/smart-attendanceESP32",
     "isPrivate": false
