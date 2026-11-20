@@ -2,13 +2,18 @@
   import { onMount } from 'svelte';
   
   let orb: HTMLElement;
-  let mouseX = window.innerWidth / 2;
-  let mouseY = window.innerHeight / 2;
-  let currentX = window.innerWidth / 2;
-  let currentY = window.innerHeight / 2;
+  let mouseX = typeof window !== 'undefined' ? window.innerWidth / 2 : 0;
+  let mouseY = typeof window !== 'undefined' ? window.innerHeight / 2 : 0;
+  let currentX = typeof window !== 'undefined' ? window.innerWidth / 2 : 0;
+  let currentY = typeof window !== 'undefined' ? window.innerHeight / 2 : 0;
   
   onMount(() => {
     if (window.matchMedia("(pointer: coarse)").matches) return;
+
+    mouseX = window.innerWidth / 2;
+    mouseY = window.innerHeight / 2;
+    currentX = mouseX;
+    currentY = mouseY;
 
     const handleMouseMove = (e: MouseEvent) => {
       mouseX = e.clientX;

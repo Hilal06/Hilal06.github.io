@@ -43,6 +43,14 @@
       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
     },
     {
+      name: "Rust",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/rust/rust-original.svg",
+    },
+    {
+      name: "Spring Boot",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg",
+    },
+    {
       name: "Docker",
       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg",
     },
@@ -53,6 +61,10 @@
     {
       name: "PostgreSQL",
       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg",
+    },
+    {
+      name: "Redis",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg",
     },
     {
       name: "MySQL",

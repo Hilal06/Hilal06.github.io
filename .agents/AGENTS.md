@@ -45,6 +45,7 @@
 - **Project Image Capture:** Use `puppeteer` to automate capturing project previews from live URLs for portfolio entries.
 - **GitHub Integration:** Use `github` MCP server to inspect active repositories, manage GH Pages deployment actions, and verify API data schemas.
 - **Figma Design Integration:** Use `figma` MCP server to inspect Figma UI components, extract color tokens for `src/app.css` `@theme`, and export visual assets.
+- **Minimalist Engineering & Anti-Bloat (Ponytail):** Utilize the `ponytail` skill suite (`ponytail`, `ponytail-audit`, `ponytail-review`, `ponytail-debt`) to prevent over-engineering, enforce YAGNI principles, and ensure solutions are lean, robust, and readable.
 
 ---
 

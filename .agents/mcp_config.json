@@ -1,0 +1,50 @@
+{
+  "mcpServers": {
+    "chrome-devtools": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "chrome-devtools-mcp"
+      ],
+      "description": "Inspeksi UI, audit aksesibilitas (a11y), pengujian responsivitas, dan analisis performa (LCP/Core Web Vitals)."
+    },
+    "github": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-github"
+      ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
+      },
+      "description": "Pengelolaan repositori GitHub, interaksi GitHub REST API, issue tracking, dan status deployment GitHub Pages."
+    },
+    "puppeteer": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-puppeteer"
+      ],
+      "description": "Otomasi pengambilan screenshot halaman web proyek untuk dimasukkan ke data portofolio (projects.json)."
+    },
+    "memory": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-memory"
+      ],
+      "description": "Penyimpanan memori konteks proyek, preferensi gaya UI, dan status tugas jangka panjang."
+    },
+    "figma": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "figma-developer-mcp"
+      ],
+      "env": {
+        "FIGMA_PERSONAL_ACCESS_TOKEN": "${FIGMA_TOKEN}"
+      },
+      "description": "Membaca komponen UI, warna, layout, dan merender aset dari file desain Figma ke kode Svelte/Tailwind."
+    }
+  }
+}

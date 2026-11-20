@@ -29,8 +29,9 @@
   onMount(() => {
     gsap.registerPlugin(ScrollTrigger);
 
+    let parallaxTween: gsap.core.Tween | null = null;
     if (bgRef) {
-      gsap.to(bgRef, {
+      parallaxTween = gsap.to(bgRef, {
         y: "15vh",
         ease: "none",
         scrollTrigger: {
@@ -41,6 +42,11 @@
         },
       });
     }
+
+    return () => {
+      parallaxTween?.scrollTrigger?.kill();
+      parallaxTween?.kill();
+    };
   });
 
   $effect(() => {

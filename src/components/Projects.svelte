@@ -53,11 +53,19 @@
         return name.includes('wed') || tech.includes('kotlin') || tech.includes('android');
       });
     }
+    if (activeFilter === 'Full Stack') {
+      return repos.filter(r => {
+        const name = (r.name || '').toLowerCase();
+        const tech = (r.techStack || []).join(' ').toLowerCase();
+        const desc = (r.description || '').toLowerCase();
+        return name.includes('attend') || name.includes('iot') || tech.includes('laravel') || tech.includes('react') || tech.includes('spring') || tech.includes('rust') || desc.includes('full-stack') || desc.includes('full stack') || desc.includes('hybrid microservice');
+      });
+    }
     if (activeFilter === 'IoT & Embedded') {
       return repos.filter(r => {
         const name = (r.name || '').toLowerCase();
         const tech = (r.techStack || []).join(' ').toLowerCase();
-        return name.includes('fish') || name.includes('attend') || tech.includes('esp32') || tech.includes('arduino');
+        return name.includes('fish') || name.includes('attend') || name.includes('iot') || tech.includes('esp32') || tech.includes('arduino') || tech.includes('iot') || tech.includes('mqtt');
       });
     }
     return repos.filter(r => {
@@ -67,17 +75,6 @@
     });
   });
 
-  function getProjectBadge(repoName: string): string {
-    const name = repoName.toLowerCase();
-    if (name.includes('smart') || name.includes('attend')) return 'Enterprise Full-Stack';
-    if (name.includes('fish') || name.includes('feeder')) return 'IoT & Embedded Hardware';
-    if (name.includes('linux')) return 'Linux DevOps & TUI';
-    if (name.includes('win')) return 'Windows Automation';
-    if (name.includes('telemetry') || name.includes('daemon') || name.includes('cli')) return 'CLI & Systems Daemon';
-    if (name.includes('wed-planner') || name.includes('wed planner')) return 'Native Android App';
-    if (name.includes('wedding')) return 'Modern Web & CMS';
-    return 'Software Project';
-  }
 
   function openModal(project: Project) {
     selectedProject = project;

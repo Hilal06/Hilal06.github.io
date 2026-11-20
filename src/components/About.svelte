@@ -20,11 +20,14 @@
       icon: "M5 12h14M12 5l7 7-7 7",
       skills: [
         { name: "Laravel", isPrimary: true },
+        { name: "Spring Boot", isPrimary: true },
+        { name: "Rust (Axum)" },
         { name: "NodeJS" },
         { name: "Python" },
         { name: "PHP", isPrimary: true },
         { name: "Supabase Cloud" },
         { name: "PostgreSQL", isPrimary: true },
+        { name: "Redis" },
         { name: "MySQL" },
         { name: "RabbitMQ AMQP" },
         { name: "REST APIs", isPrimary: true }

@@ -34,6 +34,38 @@
     "isPrivate": false
   },
   {
+    "description": "A hybrid microservice platform for home IoT and energy management featuring a sub-millisecond Rust Axum ingestion gateway, Spring Boot 3.3 safety engine, and an industrial SCADA dashboard in Svelte 5.",
+    "longDescription": "Home IoT Control Center is an enterprise-grade, hybrid microservices platform engineered for residential energy management and smart home automation. Built with strict separation of concerns, the architecture unites a sub-millisecond edge ingestion gateway in Rust (Axum, rumqttc) for processing high-frequency sensor streams, an intelligent business engine in Spring Boot 3.3 (Java 17, Lettuce Redis) to enforce safety rules and PLN token quota analytics, and an industrial SCADA dashboard in Svelte 5 (Runes) delivering real-time telemetry over WebSockets without HTTP polling. Hardware nodes connect via ESP32 master gateways and low-power ESP-NOW sensor meshes with transparent HTTP direct fallback.",
+    "techStack": [
+      "Rust",
+      "Spring Boot",
+      "Svelte 5",
+      "ESP32",
+      "MQTT",
+      "Redis",
+      "TimescaleDB",
+      "Docker"
+    ],
+    "features": [
+      "Hybrid Microservices: Decoupled high-throughput Rust Axum edge gateway and Spring Boot 3.3 business rules engine.",
+      "Industrial SCADA Dashboard: Modern Svelte 5 (Runes) dark glassmorphic interface with real-time gauges, uPlot charts, and direct control panels.",
+      "Real-Time Telemetry Stream: Sub-millisecond sensor data ingestion via Mosquitto MQTT, TimescaleDB hypertables, and low-latency WebSockets.",
+      "Automated Safety Interlock: Proactive electrical load-shedding (> 900W), instant solenoid valve cutoff on gas/water leaks, and siren alarms.",
+      "Prepaid PLN Energy Analytics: Real-time calculation of PLN token quota (Rp & kWh), consumption burn-rate, and remaining operational days.",
+      "Hardware Edge & Fallback: ESP32 master gateway with PlatformIO C++, ESP-NOW wireless sensor mesh, and transparent HTTP direct fallback.",
+      "Security Hardened: Smart Lock device protection, loopback-isolated database & cache, MQTT topic injection validation, and Telegram/Discord emergency dispatch."
+    ],
+    "screenshot": "./projects/home-iot/01_scada_dashboard.png",
+    "images": [
+      "./projects/home-iot/01_scada_dashboard.png",
+      "./projects/home-iot/02_telemetry_analytics.png",
+      "./projects/home-iot/03_device_management.png",
+      "./projects/home-iot/04_system_consoles.png"
+    ],
+    "html_url": "https://github.com/Hilal06/home-iot-control-center",
+    "isPrivate": false
+  },
+  {
     "description": "An automated, IoT-enabled fish feeder designed for aquariums. Features precise feeding controls and a modern aesthetic.",
     "longDescription": "An automated, web-controlled fish feeder powered by a Wemos D1 Mini (ESP8266), an RTC module (DS3231 or DS1307), and a servo motor.",
     "techStack": [

@@ -22,6 +22,7 @@ export function reveal(node: HTMLElement, { delay = 0, y = 50, duration = 1, eas
 
   return {
     destroy() {
+      animation.scrollTrigger?.kill();
       animation.kill();
     }
   };

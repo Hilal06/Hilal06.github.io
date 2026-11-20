@@ -7,7 +7,7 @@ export async function getProfile(username: string): Promise<GitHubProfile> {
   const cacheKey = `gh_profile_${username}`;
   
   if (typeof window !== 'undefined') {
-    const cached = sessionStorage.getItem(cacheKey);
+    const cached = localStorage.getItem(cacheKey);
     if (cached) {
       try {
         const { data, timestamp } = JSON.parse(cached);
@@ -15,7 +15,7 @@ export async function getProfile(username: string): Promise<GitHubProfile> {
           return data;
         }
       } catch {
-        sessionStorage.removeItem(cacheKey);
+        localStorage.removeItem(cacheKey);
       }
     }
   }
@@ -26,7 +26,7 @@ export async function getProfile(username: string): Promise<GitHubProfile> {
     
     const data = await res.json();
     if (typeof window !== 'undefined') {
-      sessionStorage.setItem(cacheKey, JSON.stringify({ data, timestamp: Date.now() }));
+      localStorage.setItem(cacheKey, JSON.stringify({ data, timestamp: Date.now() }));
     }
     return data;
   } catch (err) {
@@ -47,7 +47,7 @@ export async function getRepos(username: string): Promise<GitHubRepo[]> {
   const cacheKey = `gh_repos_${username}`;
   
   if (typeof window !== 'undefined') {
-    const cached = sessionStorage.getItem(cacheKey);
+    const cached = localStorage.getItem(cacheKey);
     if (cached) {
       try {
         const { data, timestamp } = JSON.parse(cached);
@@ -55,7 +55,7 @@ export async function getRepos(username: string): Promise<GitHubRepo[]> {
           return data;
         }
       } catch {
-        sessionStorage.removeItem(cacheKey);
+        localStorage.removeItem(cacheKey);
       }
     }
   }
@@ -66,7 +66,7 @@ export async function getRepos(username: string): Promise<GitHubRepo[]> {
     
     const data = await res.json();
     if (typeof window !== 'undefined') {
-      sessionStorage.setItem(cacheKey, JSON.stringify({ data, timestamp: Date.now() }));
+      localStorage.setItem(cacheKey, JSON.stringify({ data, timestamp: Date.now() }));
     }
     return data;
   } catch (err) {
